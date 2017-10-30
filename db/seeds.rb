@@ -30,3 +30,18 @@ csv.each do |row|
 end
 
 puts "There are now #{Stop.count} rows in the stop table"
+
+RESOURCES = ["bus", "campsites", "coin laundry", "doctor, medical", "fuel", "groceries, supplies", "short-term resupply", "hostel", "lodging", "meals, restaurants", "outfitter", "parking", "post office", "road access", "shelter", "shower", "train", "no potable water", "veterinarian", "water"]
+
+RESOURCES.each do |resource|
+  t = Resource.new
+  t.name = resource
+  t.save
+
+  if t.valid?
+    puts "#{t.name} saved"
+  else
+    puts "#{t.name} DID NOT SAVE"
+  end
+
+end
