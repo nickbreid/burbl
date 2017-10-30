@@ -20,7 +20,13 @@ csv.each do |row|
   t.elevation = row['elevation']
   t.miles_from_k = row['miles_from_k']
   t.save
-  puts "#{t.miles_from_ga} - #{t.name} saved"
+
+  if t.valid?
+    puts "#{t.miles_from_ga} - #{t.name} saved"
+  else
+    puts "#{t.miles_from_ga} - #{t.name} DID NOT SAVE"
+  end
+
 end
 
 puts "There are now #{Stop.count} rows in the stop table"
