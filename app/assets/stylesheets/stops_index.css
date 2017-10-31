@@ -42,11 +42,13 @@ ul li {
   height: 16px;
   width: 16px;
   display: block;
+  background-size: 100%;
 }
 
-.icon-hostel {
+.icon-coin-laundry {
   background: url('laundry-icon.png');
   height: 16px;
   width: 16px;
   display: block;
+  background-size: 100%;
 }
