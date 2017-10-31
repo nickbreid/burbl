@@ -1,8 +1,9 @@
 import React from 'react';
+import StopsIndexContainer from './containers/StopsIndexContainer'
 
 const App = props => {
   return(
-    <h1>Hello World</h1>
+    <StopsIndexContainer />
   )
 }
 
