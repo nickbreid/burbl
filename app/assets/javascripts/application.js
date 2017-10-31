@@ -11,4 +11,10 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require jquery
+//= require jquery_ujs
+//= require foundation
 //= require_tree .
+//= require modernizr
+
+$(function(){ $(document).foundation(); });

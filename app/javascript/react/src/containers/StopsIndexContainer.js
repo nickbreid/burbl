@@ -37,7 +37,7 @@ class StopsIndexContainer extends Component {
     })
 
     return (
-      <div>
+      <div className="grid-container">
         <ul>
           {parsedStops}
         </ul>
