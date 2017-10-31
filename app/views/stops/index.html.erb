@@ -1,0 +1,22 @@
+<h1>Stops#index</h1>
+
+  <% if @stops %>
+    <ul>
+      <% @stops.each do |stop| %>
+        <li>
+          <h3> <%= stop.name %> </h3>
+          <p>Miles from Springer: <%= stop.miles_from_ga %></p>
+          <p>Elevation: <%= stop.elevation %> </p>
+          <% if stop.stopresources %>
+          <ul>
+            <% stop.stopresources.each do |sr| %>
+              <li>
+                <%= Resource.find(sr.resource_id).name %>
+              </li>
+            <% end %>
+          </ul>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
