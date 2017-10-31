@@ -7,6 +7,11 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'foundation-rails'
 gem 'webpacker', '~> 3.0'
+gem 'jquery-rails'
+gem 'modernizr-rails'
+gem 'font-awesome-rails'
+gem 'draper'
+gem 'fontello_rails_converter'
 
 
 group :development do

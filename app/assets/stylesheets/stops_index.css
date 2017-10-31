@@ -1,0 +1,58 @@
+body {
+  background-color: #fdfdfd;
+}
+
+.row {
+  display: flex;
+  display: -ms-flex;
+	display: -webkit-flex;
+  margin-bottom: 2px;
+  align-items: stretch;
+}
+
+.align-center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.mile-marker {
+  text-align: right;
+  background-color: #CCDBDC;
+}
+
+.to-next-point {
+  text-align: left;
+  background-color: #CCDBDC;
+  align-self: stretch;
+}
+
+.stop-name {
+  background-color: #93B7BE;
+}
+
+ul li {
+  list-style: none;
+  padding-right: 10px;
+}
+
+.icon-hostel {
+  background: url('hostel-icon.png');
+  height: 16px;
+  width: 16px;
+  display: block;
+  background-size: 100%;
+  position: relative;
+  bottom: -3px;
+}
+
+.icon-coin-laundry {
+  background: url('laundry-icon.png');
+  height: 16px;
+  width: 16px;
+  display: block;
+  background-size: 100%;
+  position: relative;
+  bottom: -3px;
+}
