@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import StopTile from '../components/StopTile.js'
+import StopTileLabels from '../components/StopTileLabels.js'
 import MileField from '../components/MileField.js'
 import NoboToggle from '../components/NoboToggle.js'
 
@@ -83,21 +84,7 @@ class StopsIndexContainer extends Component {
           </div>
         </div>
         <ul>
-          <li>
-            <div className="row align-middle">
-              <div className="small-2 columns mile-marker align-center">
-                <h3>Mile</h3>
-              </div>
-
-              <div className="small-9 columns stop-name">
-                <h3>Name</h3>
-              </div>
-
-              <div className="small-1 columns to-next-point align-center">
-                <p>To next point</p>
-              </div>
-            </div>
-          </li>
+          <StopTileLabels />
           {parsedStops}
         </ul>
       </div>
