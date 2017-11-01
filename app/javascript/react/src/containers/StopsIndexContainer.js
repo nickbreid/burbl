@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import StopTile from '../components/StopTile.js'
+import MileForm from './MileForm.js'
 
 class StopsIndexContainer extends Component {
   constructor(props) {
@@ -38,6 +39,7 @@ class StopsIndexContainer extends Component {
 
     return (
       <div className="grid-container">
+        <MileForm />
         <ul>
           <li>
             <div className="row align-middle">

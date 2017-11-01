@@ -85,3 +85,11 @@ i[title]:hover:after {
   background-image: -ms-linear-gradient(top, #eeeeee, #cccccc);
   background-image: -o-linear-gradient(top, #eeeeee, #cccccc);
 }
+
+.switch.large .switch-paddle {
+  width: 10rem;
+}
+
+.switch.large input:checked ~ .switch-paddle::after {
+    left: 7.9rem;
+}
