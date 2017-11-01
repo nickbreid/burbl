@@ -20,6 +20,7 @@ body {
 .mile-marker {
   text-align: right;
   background-color: #CCDBDC;
+  align-self: stretch;
 }
 
 .to-next-point {
@@ -41,7 +42,7 @@ ul li {
   background: url('hostel-icon.png');
   height: 16px;
   width: 16px;
-  display: block;
+  display: inline-block;
   background-size: 100%;
   position: relative;
   bottom: -3px;

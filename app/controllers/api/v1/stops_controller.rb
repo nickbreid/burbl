@@ -1,6 +1,6 @@
 class Api::V1::StopsController < ApplicationController
   def index
-    stops = Stop.all
+    stops = Stop.all.limit(10)
     parsed_stops = stops.map do |stop|
       return_stop = {
         name: stop.name,
