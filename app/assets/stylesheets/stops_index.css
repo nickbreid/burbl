@@ -93,3 +93,7 @@ i[title]:hover:after {
 .switch.large input:checked ~ .switch-paddle::after {
     left: 7.9rem;
 }
+
+#mile-field {
+  width: 10rem;
+}

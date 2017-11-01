@@ -1,6 +1,6 @@
 class Api::V1::StopsController < ApplicationController
   def index
-    stops = Stop.all.limit(10)
+    stops = Stop.where("miles_from_ga >= ?", params[:mile].to_f).limit(10)
     parsed_stops = stops.map do |stop|
       stop_returned = {
         name: stop.name,
