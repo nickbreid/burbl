@@ -16,21 +16,17 @@ class StopsIndexContainer extends Component {
   }
 
   toggleNobo() {
-    this.setState({ nobo: !this.state.nobo })
+
+    let floatMile = parseFloat(this.state.mile)
+    let newMile = (2189.8 - floatMile)
+    this.setState({
+      nobo: !this.state.nobo,
+      mile: newMile.toFixed(1)
+     })
   }
 
   handleChange(event) {
     this.setState({ mile: event.target.value })
-    fetch(`/api/v1/stops/?mile=${event.target.value}`, {
-      credentials: 'same-origin',
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
-    })
-    .then(response => response.json() )
-    .then(body => {
-
-      this.setState({ stops: body.data })
-    })
   }
 
   componentDidMount() {
@@ -44,6 +40,21 @@ class StopsIndexContainer extends Component {
       this.setState({ stops: body.data })
     })
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.mile !== this.state.mile || prevState.nobo !== this.state.nobo) {
+      fetch(`/api/v1/stops/?nobo=${this.state.nobo}&mile=${this.state.mile}`, {
+        credentials: 'same-origin',
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(response => response.json() )
+      .then(body => {
+        this.setState({ stops: body.data })
+        })
+      }
+    }
+
 
   render() {
     let parsedStops = this.state.stops.map((stop) => {

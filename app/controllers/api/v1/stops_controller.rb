@@ -1,12 +1,30 @@
 class Api::V1::StopsController < ApplicationController
   def index
-    stops = Stop.where("miles_from_ga >= ?", params[:mile].to_f).limit(10)
+    mile = params[:mile].to_f
+    nobo = params[:nobo]
+
+    if nobo == "false"
+      stops = Stop.where("miles_from_k >= ?", mile).order(:miles_from_k).limit(10)
+    else
+      stops = Stop.where("miles_from_ga >= ?", mile).limit(10)
+    end
+
     parsed_stops = stops.map do |stop|
-      stop_returned = {
-        name: stop.name,
-        mile_marker: stop.miles_from_ga,
-        to_next_point: stop.to_next_point
-      }
+
+      if nobo == "false"
+        stop_returned = {
+          name: stop.name,
+          mile_marker: stop.miles_from_k,
+          to_next_point: stop.to_next_point
+        }
+      else
+        stop_returned = {
+          name: stop.name,
+          mile_marker: stop.miles_from_ga,
+          to_next_point: stop.to_next_point
+        }
+      end
+
       stop_resources = stop.stopresources
       unless stop_resources.empty?
         stop_returned[:stop_resources] = []
