@@ -186,3 +186,7 @@ i[title]:hover:after {
 button:focus {
   outline:0;
 }
+
+.stops-container {
+  height: 600px;
+}

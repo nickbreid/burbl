@@ -123,24 +123,26 @@ class StopsIndexContainer extends Component {
             </div>
           </div>
         </div>
-        <div className="row input-row align-items-bottom">
-          <NoboToggle
-            toggleNobo={this.toggleNobo}
-          />
-          <MileField
-            mile={this.state.mile}
-            handleChange={this.handleChange}
-            handlePlus={this.handlePlus}
-            handleMinus={this.handleMinus}
-          />
-          <div className="small-12 medium-6 columns">
-            <p>Choose a direction and mile-marker. The limits within Massachusetts are {ctBorder} to {vtBorder}.</p>
+        <div className="stops-container">
+          <div className="row input-row align-items-bottom">
+            <NoboToggle
+              toggleNobo={this.toggleNobo}
+            />
+            <MileField
+              mile={this.state.mile}
+              handleChange={this.handleChange}
+              handlePlus={this.handlePlus}
+              handleMinus={this.handleMinus}
+            />
+            <div className="small-12 medium-6 columns">
+              <p>Choose a direction and mile-marker. The limits within Massachusetts are {ctBorder} to {vtBorder}.</p>
+            </div>
           </div>
+          <ul>
+            <StopTileLabels />
+            {parsedStops}
+          </ul>
         </div>
-        <ul>
-          <StopTileLabels />
-          {parsedStops}
-        </ul>
       </div>
     )
   }
