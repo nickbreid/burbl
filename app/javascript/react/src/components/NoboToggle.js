@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const NoboToggle = props => {
 
   let handleClick = () => {
@@ -8,7 +7,7 @@ const NoboToggle = props => {
   }
 
   return (
-    <div>
+    <div className="small-6 medium-3 columns">
       <div className="switch large" onChange={handleClick}>
         <input className="switch-input" id="nobo" type="checkbox" name="nobo"/>
         <label className="switch-paddle" htmlFor="nobo">
@@ -18,7 +17,6 @@ const NoboToggle = props => {
         </label>
       </div>
     </div>
-
   )
 }
 

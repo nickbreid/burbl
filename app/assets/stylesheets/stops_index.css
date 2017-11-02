@@ -1,13 +1,58 @@
+@import url('https://fonts.googleapis.com/css?family=Averia+Libre|Lato');
+
 body {
-  background-color: #fdfdfd;
+  background-color: #C9D5E2;
+  height: 100%;
+}
+
+.jumbotron {
+  /*cody-black-52701.jpg*/
+  /*jake-ingle-140416.jpg*/
+  background: url('ales-krivec-2.jpg') no-repeat center;
+  background-size: cover;
+  background-position: center center;
+  height: 80vh;
+  position: relative;
+  padding: 5%;
+}
+
+.jumbotron h1 {
+  font-family: 'Averia Libre', cursive;
+}
+
+.jumbotron h2 {
+  font-family: 'Lato', sans-serif;
+}
+
+.input-row {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .row {
   display: flex;
   display: -ms-flex;
 	display: -webkit-flex;
-  margin-bottom: 2px;
   align-items: stretch;
+}
+
+.stop-tile {
+  margin-bottom: 5px;
+}
+
+.column-label p {
+  margin-bottom: 0px;
+  color: gray;
+}
+
+.column-label-right {
+  text-align: right;
+}
+
+.align-items-bottom {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
 }
 
 .align-center {
@@ -19,12 +64,6 @@ body {
 
 .mile-marker {
   text-align: right;
-  background-color: #CCDBDC;
-  align-self: stretch;
-}
-
-.to-next-point {
-  text-align: left;
   background-color: #CCDBDC;
   align-self: stretch;
 }
@@ -52,7 +91,7 @@ ul li {
   background: url('laundry-icon.png');
   height: 16px;
   width: 16px;
-  display: block;
+  display: inline-block;
   background-size: 100%;
   position: relative;
   bottom: -3px;
@@ -91,9 +130,59 @@ i[title]:hover:after {
 }
 
 .switch.large input:checked ~ .switch-paddle::after {
-    left: 7.9rem;
+  left: 7.9rem;
 }
 
 #mile-field {
-  width: 10rem;
+  width: 5rem;
+  margin-bottom: 0;
+  height: 43px;
+}
+
+.prev-stop-mile {
+  background-color: #d7d7d7;
+}
+
+.prev-stop-name {
+  background-color: #bdbdbd;
+}
+
+.this-stop-name {
+  background-color: #43B270;
+}
+
+.this-stop-name a, .this-stop-name i, .this-stop-name li {
+  color: white;
+}
+
+.this-stop-mile {
+  background-color: #86BAA1;
+}
+
+.plus-minus-input {
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.plus-minus-input .input-group-field {
+  text-align: center;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 1rem;
+}
+
+.plus-minus-input .input-group-field::-webkit-inner-spin-button,
+.plus-minus-input .input-group-field ::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+          appearance: none;
+}
+
+.plus-minus-input .input-group-button .circle {
+  padding: 0.25em 0.8em;
+  margin-bottom: -20px;
+}
+
+button:focus {
+  outline:0;
 }
