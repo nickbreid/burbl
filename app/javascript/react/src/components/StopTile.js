@@ -3,6 +3,27 @@ import { Link } from 'react-router'
 
 const StopTile = props => {
 
+  // prints a StopTile with extra CSS classes added thru arguments
+  let printTile = (mileClass, nameClass) => {
+    return (
+      <li key={props.mileMarker}>
+        <div className="row align-middle stop-tile">
+          <div className={`small-3 columns mile-marker align-center ${mileClass}`}>
+              <h3>{props.mileMarker}</h3>
+          </div>
+          <div className={`small-9 columns stop-name ${nameClass}`}>
+            <Link to={`/stops/${props.id}`}>
+              <h3>{props.name}</h3>
+            </Link>
+            <ul className="menu">
+              {parsedResources}
+            </ul>
+          </div>
+        </div>
+      </li>
+    )
+  }
+
   let parsedResources, lastLocation, distDir;
 
   // if the stop has resources
@@ -40,32 +61,28 @@ const StopTile = props => {
         // if the resource doesn't have an icon, display its name
         return (
           <div>
-            <li key={resource.id}>{resource.resource}</li>
+            <li key={resource.id}>
+              {resource.resource}
+            </li>
           </div>
         )
       }
     })
   }
 
-  return (
-    <li key={props.mileMarker}>
-      <div className="row align-middle">
-        <div className="small-3 columns mile-marker align-center">
-          <Link to={`/stops/${props.id}`}>
-            <h3>{props.mileMarker}</h3>
-          </Link>
-        </div>
-
-        <div className="small-9 columns stop-name">
-            <h3>{props.name}</h3>
-          <ul className="menu">
-            {parsedResources}
-          </ul>
-        </div>
-      </div>
-    </li>
-
-  )
+  if (props.prevStop == true) {
+    return (
+      printTile("prev-stop-mile", "prev-stop-name")
+    )
+  } else if (props.thisStop == true) {
+    return (
+      printTile("this-stop-mile", "this-stop-name")
+    )
+  } else {
+    return (
+      printTile("", "")
+    )
+  }
 }
 
 export default StopTile;

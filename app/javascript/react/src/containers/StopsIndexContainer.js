@@ -11,10 +11,14 @@ class StopsIndexContainer extends Component {
     this.state = {
       stops: [],
       mile: 1505.9,
-      nobo: true
+      nobo: true,
+      prevStop: {},
+      thisStop: {}
     }
     this.toggleNobo = this.toggleNobo.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handlePlus = this.handlePlus.bind(this)
+    this.handleMinus = this.handleMinus.bind(this)
   }
 
   // swap direction from north to south
@@ -32,6 +36,16 @@ class StopsIndexContainer extends Component {
     this.setState({ mile: event.target.value })
   }
 
+  handlePlus() {
+    let milePlusOne = parseFloat(this.state.mile)+1
+    this.setState({ mile: milePlusOne.toFixed(1) })
+  }
+
+  handleMinus() {
+    let mileMinusOne = parseFloat(this.state.mile)-1
+    this.setState({ mile: mileMinusOne.toFixed(1) })
+  }
+
   // fetch stops data
   componentDidMount() {
     fetch(`/api/v1/stops.json`, {
@@ -41,8 +55,10 @@ class StopsIndexContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      console.log(body.data);
-      this.setState({ stops: body.data })
+      this.setState({
+        stops: body.data,
+        thisStop: body.this_stop
+       })
     })
   }
 
@@ -56,14 +72,25 @@ class StopsIndexContainer extends Component {
       })
       .then(response => response.json() )
       .then(body => {
-        this.setState({ stops: body.data })
+        console.log(body);
+        this.setState({
+          stops: body.data,
+          prevStop: body.prev_stop,
+          thisStop: body.this_stop
+         })
         })
       }
     }
 
   render() {
     let parsedStops = this.state.stops.map((stop) => {
-      return (
+      let prevStop, thisStop;
+      if (this.state.prevStop && this.state.prevStop.id == stop.id) {
+        prevStop = true;
+      } else if (this.state.thisStop && this.state.thisStop.id == stop.id) {
+        thisStop = true;
+      }
+       return (
         <StopTile
           id={stop.id}
           key={stop.id}
@@ -71,6 +98,8 @@ class StopsIndexContainer extends Component {
           name={stop.name}
           toNextPoint={stop.to_next_point}
           stopResources={stop.stop_resources}
+          prevStop={prevStop}
+          thisStop={thisStop}
         />
       )
     })
@@ -90,23 +119,22 @@ class StopsIndexContainer extends Component {
           <div className="row">
             <div className="small-12 medium-9 columns">
               <h1>Be resourceful.</h1>
-              <p>Plan for what's ahead on the Appalachian Trail. Choose a direction and a mile-marker to find nearby water sources, campsites, parking and more.</p>
+              <h2>Find water sources, campsites, parking and more along the Appalachian Trail.</h2>
             </div>
           </div>
         </div>
-        <div className="row align-items-bottom">
+        <div className="row input-row align-items-bottom">
           <NoboToggle
             toggleNobo={this.toggleNobo}
           />
           <MileField
             mile={this.state.mile}
             handleChange={this.handleChange}
+            handlePlus={this.handlePlus}
+            handleMinus={this.handleMinus}
           />
-          <div className="small-6 medium-3 columns">
-            <p>MA-CT border: {ctBorder}</p>
-          </div>
-          <div className="small-6 medium-3 columns">
-            <p>MA-VT border: {vtBorder}</p>
+          <div className="small-12 medium-6 columns">
+            <p>Choose a direction and mile-marker. The limits within Massachusetts are {ctBorder} to {vtBorder}.</p>
           </div>
         </div>
         <ul>
