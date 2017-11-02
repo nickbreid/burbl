@@ -16,8 +16,8 @@ class StopsIndexContainer extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
+  // swap direction from north to south
   toggleNobo() {
-
     let floatMile = parseFloat(this.state.mile)
     let newMile = (2189.8 - floatMile)
     this.setState({
@@ -26,10 +26,12 @@ class StopsIndexContainer extends Component {
      })
   }
 
+  // updates state on MileField change
   handleChange(event) {
     this.setState({ mile: event.target.value })
   }
 
+  // fetch stops data
   componentDidMount() {
     fetch(`/api/v1/stops.json`, {
       credentials: 'same-origin',
@@ -42,6 +44,7 @@ class StopsIndexContainer extends Component {
     })
   }
 
+  // if mile or nobo changes, fetch relevant stops data
   componentDidUpdate(prevProps, prevState) {
     if (prevState.mile !== this.state.mile || prevState.nobo !== this.state.nobo) {
       fetch(`/api/v1/stops/?nobo=${this.state.nobo}&mile=${this.state.mile}`, {
@@ -55,7 +58,6 @@ class StopsIndexContainer extends Component {
         })
       }
     }
-
 
   render() {
     let parsedStops = this.state.stops.map((stop) => {

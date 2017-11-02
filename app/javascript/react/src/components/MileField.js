@@ -1,8 +1,6 @@
 import React from 'react';
 
-
 const MileField = props => {
-
   return (
     <div>
       <label>
@@ -10,7 +8,6 @@ const MileField = props => {
         <input id="mile-field" type="number" placeholder="Mile" value={props.mile} onChange={props.handleChange}></input>
       </label>
     </div>
-
   )
 }
 

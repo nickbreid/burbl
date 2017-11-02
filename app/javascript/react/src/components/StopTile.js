@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const StopTile = props => {
 
   let parsedResources, lastLocation, distDir;

@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const NoboToggle = props => {
 
   let handleClick = () => {
@@ -18,7 +17,6 @@ const NoboToggle = props => {
         </label>
       </div>
     </div>
-
   )
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const StopTileLabels = props => {
-
+// does this need props ^
   return (
     <li>
       <div className="row align-middle">
