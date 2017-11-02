@@ -6,8 +6,9 @@ import StopsShowContainer from './containers/StopsShowContainer'
 const App = props => {
   return(
     <Router history={browserHistory}>
-      <Route path='/stops'>
+      <Route path='/'>
         <IndexRoute component={StopsIndexContainer}/>
+        <Route path='/stops' component={StopsIndexContainer}/>
         <Route path='/stops/:id' component={StopsShowContainer}/>
       </Route>
     </Router>
