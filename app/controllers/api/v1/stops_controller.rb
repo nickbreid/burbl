@@ -11,18 +11,7 @@ class Api::V1::StopsController < ApplicationController
 
     parsed_stops = stops.map do |stop|
 
-      # nobo_or_sobo_setup(nobo, stop, stop_returned)
-      if nobo == "false"
-        stop_returned = {
-          name: stop.name,
-          mile_marker: stop.miles_from_k
-        }
-      else
-        stop_returned = {
-          name: stop.name,
-          mile_marker: stop.miles_from_ga
-        }
-      end
+      stop_returned = nobo_or_sobo_setup(nobo, stop, stop_returned)
 
       # index_info_adder(stop, stop_returned)
 
@@ -54,24 +43,9 @@ class Api::V1::StopsController < ApplicationController
     nobo = params[:nobo]
     stop = Stop.find(params[:id])
 
-    # nobo_or_sobo_setup(nobo, stop, stop_returned)
-    if nobo == "false"
-      stop_returned = {
-        name: stop.name,
-        description: stop.description,
-        mile_marker: stop.miles_from_k,
-        town_access: stop.town_access
-      }
-    else
-      stop_returned = {
-        name: stop.name,
-        description: stop.description,
-        mile_marker: stop.miles_from_ga,
-        town_access: stop.town_access
-      }
-    end
+    stop_returned = nobo_or_sobo_setup(nobo, stop, stop_returned)
 
-    #show_page_info_adder(stop, stop_returned)
+    show_page_info_adder(stop, stop_returned)
 
     stop_resources = stop.stopresources
 
@@ -90,6 +64,7 @@ class Api::V1::StopsController < ApplicationController
         stop_returned[:stop_resources] << stop_resources_returned
       end
     end
+
     render json: { status: 'SUCCESS', message: 'Loaded show page stop data', data: stop_returned }, status: :ok
   end
 
@@ -99,24 +74,27 @@ class Api::V1::StopsController < ApplicationController
   def nobo_or_sobo_setup(nobo, raw_stop, stop_returned)
     if nobo == "false"
       stop_returned = {
+        id: raw_stop.id,
         name: raw_stop.name,
         mile_marker: raw_stop.miles_from_k
       }
     else
       stop_returned = {
+        id: raw_stop.id,
         name: raw_stop.name,
         mile_marker: raw_stop.miles_from_ga
       }
     end
+    stop_returned
   end
 
   def show_page_info_adder(raw_stop, stop_returned)
     if raw_stop.description
-      let raw_stop[:description] = raw_stop.description
+      raw_stop[:description] = raw_stop.description
     end
 
     if raw_stop.town_access
-      let raw_stop[:town_access] = raw_stop.town_access
+      raw_stop[:town_access] = raw_stop.town_access
     end
   end
 
@@ -136,7 +114,7 @@ class Api::V1::StopsController < ApplicationController
     end
   end
 
-  def index_page_adder(raw_stop, stop_returned)
+  def index_info_adder(raw_stop, stop_returned)
     stop_returned[:to_next_point] = stop.to_next_point
   end
 

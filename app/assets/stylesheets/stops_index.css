@@ -1,13 +1,33 @@
 body {
-  background-color: #fdfdfd;
+  background-color: #C9D5E2;
+  height: 100%;
+}
+
+.jumbotron {
+  /*cody-black-52701.jpg*/
+  /*jake-ingle-140416.jpg*/
+  background: url('ales-krivec-2.jpg') no-repeat center;
+  background-size: cover;
+  background-position: center center;
+  height: 80vh;
+  position: relative;
+  padding: 5%;
 }
 
 .row {
   display: flex;
   display: -ms-flex;
 	display: -webkit-flex;
-  margin-bottom: 2px;
+  margin: 1px 0px;
   align-items: stretch;
+}
+
+.align-items-bottom {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  position: relative;
+  bottom: 5%;
 }
 
 .align-center {
@@ -52,7 +72,7 @@ ul li {
   background: url('laundry-icon.png');
   height: 16px;
   width: 16px;
-  display: block;
+  display: inline-block;
   background-size: 100%;
   position: relative;
   bottom: -3px;
@@ -91,7 +111,7 @@ i[title]:hover:after {
 }
 
 .switch.large input:checked ~ .switch-paddle::after {
-    left: 7.9rem;
+  left: 7.9rem;
 }
 
 #mile-field {

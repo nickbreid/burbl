@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router'
 
 const StopTile = props => {
 
@@ -49,8 +50,10 @@ const StopTile = props => {
   return (
     <li key={props.mileMarker}>
       <div className="row align-middle">
-        <div className="small-2 columns mile-marker align-center">
-          <h3>{props.mileMarker}</h3>
+        <div className="small-3 columns mile-marker align-center">
+          <Link to={`/stops/${props.id}`}>
+            <h3>{props.mileMarker}</h3>
+          </Link>
         </div>
 
         <div className="small-9 columns stop-name">
@@ -58,10 +61,6 @@ const StopTile = props => {
           <ul className="menu">
             {parsedResources}
           </ul>
-        </div>
-
-        <div className="small-1 columns to-next-point align-center">
-          <p>{props.toNextPoint}m</p>
         </div>
       </div>
     </li>
