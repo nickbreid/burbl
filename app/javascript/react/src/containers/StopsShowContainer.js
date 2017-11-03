@@ -14,6 +14,7 @@ class StopsShowContainer extends Component {
     fetch(`/api/v1/stops/${stopId}`)
     .then(response => response.json() )
     .then(body => {
+      console.log(body);
       this.setState({ stop: body.data })
     })
   }
@@ -73,10 +74,21 @@ class StopsShowContainer extends Component {
     return (
       <div className="grid-container">
         <BackButton />
-        <h1>{this.state.stop.name}</h1>
-        <ul>
-          {parsedResources}
-        </ul>
+        <div className="show-container">
+          <div className="row">
+            <div className="small-12 medium-6 columns show-bg">
+              <h4>{this.state.stop.mile_marker}</h4>
+              <h2>{this.state.stop.name}</h2>
+              <p>{this.state.stop.description}</p>
+              <img className="show-photo" src={this.state.stop.photo_url}/>
+            </div>
+            <div className="small-12 medium-6 columns">
+              <ul>
+                {parsedResources}
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

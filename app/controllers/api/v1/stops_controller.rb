@@ -2,6 +2,7 @@ class Api::V1::StopsController < ApplicationController
   def index
     mile = params[:mile].to_f
     nobo = params[:nobo]
+    binding.pry
 
     if nobo == "false"
       stops = Stop.where("miles_from_k >= ?", mile).order(:miles_from_k).limit(4).to_a
@@ -70,11 +71,15 @@ class Api::V1::StopsController < ApplicationController
 
   def show_page_info_adder(raw_stop, stop_returned)
     if raw_stop.description
-      raw_stop[:description] = raw_stop.description
+      stop_returned[:description] = raw_stop.description
     end
 
     if raw_stop.town_access
-      raw_stop[:town_access] = raw_stop.town_access
+      stop_returned[:town_access] = raw_stop.town_access
+    end
+
+    if raw_stop.photo_url
+      stop_returned[:photo_url] = raw_stop.photo_url
     end
   end
 

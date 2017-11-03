@@ -2,3 +2,13 @@ ul li {
   list-style: none;
   padding-right: 10px;
 }
+
+.show-bg {
+  background-color: #7CC599;
+  padding: 30px 20px;
+}
+
+.show-photo {
+  max-width:100%;
+  max-height:100%;
+}
