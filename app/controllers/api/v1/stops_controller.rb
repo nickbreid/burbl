@@ -4,7 +4,7 @@ class Api::V1::StopsController < ApplicationController
     nobo = params[:nobo]
 
     if nobo == "false"
-      stops = Stop.where("miles_from_k >= ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }
+      stops = Stop.where("miles_from_k >= ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }.reverse
       stops = stops[0..3]
       prev_stop = Stop.where("miles_from_k < ?", mile).first
       this_stop = stops.first
