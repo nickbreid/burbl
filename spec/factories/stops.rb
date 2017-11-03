@@ -3,7 +3,7 @@ FactoryGirl.define do
     name "MyStop"
     description "MyDescription"
     miles_from_ga 1550
+    miles_from_k 639.8
     elevation 1800
-    distance_from_trail 0
   end
 end
