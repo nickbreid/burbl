@@ -15,7 +15,7 @@ const StopTile = props => {
             <Link to={`/stops/${props.id}`}>
               <h3>{props.name}</h3>
             </Link>
-            <ul className="menu">
+            <ul className="menu icon-row">
               {parsedResources}
             </ul>
           </div>
@@ -24,13 +24,23 @@ const StopTile = props => {
     )
   }
 
-  let parsedResources, lastLocation, distDir;
+  let parsedResources, lastLocation, distDir, waterTile, campTile;
 
   // if the stop has resources
   if (props.stopResources) {
 
     // create array parsedResources by looping thru resources
     parsedResources = props.stopResources.map(resource => {
+
+      // check if resource is water for tile background
+      if (resource.resource == "water") {
+        waterTile = true;
+      }
+
+      //check if resource is campsite for tile border
+      if (resource.resource == "campsites") {
+        campTile = true;
+      }
 
       // note the distance and direction_from_trail, if applicable
       if (resource.distance_from_trail && resource.direction_from_trail) {
@@ -60,11 +70,9 @@ const StopTile = props => {
       } else {
         // if the resource doesn't have an icon, display its name
         return (
-          <div>
             <li key={resource.id}>
               {resource.resource}
             </li>
-          </div>
         )
       }
     })
@@ -77,6 +85,18 @@ const StopTile = props => {
   } else if (props.thisStop == true) {
     return (
       printTile("this-stop-mile", "this-stop-name")
+    )
+  } else if (waterTile == true && campTile == true) {
+    return (
+      printTile("", "water-camp-tile-name")
+    )
+  } else if (waterTile == true) {
+    return (
+      printTile("", "water-tile-name")
+    )
+  } else if (campTile == true) {
+    return (
+      printTile("", "camp-tile-name")
     )
   } else {
     return (

@@ -38,6 +38,7 @@ body {
 
 .stop-tile {
   margin-bottom: 5px;
+  min-height: 76px;
 }
 
 .column-label p {
@@ -64,12 +65,14 @@ body {
 
 .mile-marker {
   text-align: right;
-  background-color: #CCDBDC;
+  background-color: #BCE2CB;
   align-self: stretch;
 }
 
 .stop-name {
-  background-color: #93B7BE;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
 }
 
 ul li {
@@ -84,7 +87,11 @@ ul li {
   display: inline-block;
   background-size: 100%;
   position: relative;
-  bottom: -3px;
+  bottom: -1px;
+}
+
+.this-stop-name .icon-hostel {
+  -webkit-filter: invert(100%);
 }
 
 .icon-coin-laundry {
@@ -94,7 +101,11 @@ ul li {
   display: inline-block;
   background-size: 100%;
   position: relative;
-  bottom: -3px;
+  bottom: -1px;
+}
+
+.this-stop-name .icon-coin-laundry {
+  -webkit-filter: invert(100%);
 }
 
 i:hover {
@@ -141,10 +152,16 @@ i[title]:hover:after {
 
 .prev-stop-mile {
   background-color: #d7d7d7;
+  opacity: 0.3;
 }
 
 .prev-stop-name {
   background-color: #bdbdbd;
+  opacity: 0.3;
+}
+
+.prev-stop-name a {
+  color: black;
 }
 
 .this-stop-name {
@@ -156,7 +173,7 @@ i[title]:hover:after {
 }
 
 .this-stop-mile {
-  background-color: #86BAA1;
+  background-color: #7AC698;
 }
 
 .plus-minus-input {
@@ -189,4 +206,29 @@ button:focus {
 
 .stops-container {
   height: 600px;
+}
+
+.camp-tile-name {
+  background-color: #EFF3DA;
+}
+
+.water-tile-name {
+  background: linear-gradient(#FFF 50%, rgba(255,255,255,.5) 0) 0 0,
+  radial-gradient(circle closest-side, #FFF 75%, rgba(255,255,255,0) 0) 0 0,
+  radial-gradient(circle closest-side, #FFF 75%, rgba(255,255,255,0) 0) 65px 0 #48B;
+  background-size: 18px 95px;
+  background-repeat:repeat-x;
+}
+
+.water-camp-tile-name {
+  background: linear-gradient(#EFF3DA 50%, rgba(239,243,218,0) 0) 0 0,
+  radial-gradient(circle closest-side, #EFF3DA 75%, rgba(239,243,218,0) 0) 0 0,
+  radial-gradient(circle closest-side, #EFF3DA 75%, rgba(255,255,255,.5) 0) 65px 0 #48B;
+  background-size: 18px 95px;
+  background-repeat:repeat-x;
+}
+
+.icon-row {
+  margin-top: auto;
+  align-self: flex-start;
 }
