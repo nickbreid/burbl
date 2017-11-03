@@ -23,8 +23,6 @@ class Api::V1::StopsController < ApplicationController
 
       stop_returned = nobo_or_sobo_setup(nobo, stop, stop_returned)
 
-      index_info_adder(stop, stop_returned)
-
       stop_resources = stop.stopresources
 
       stop_resources_handler(stop_returned, stop_resources)
@@ -95,9 +93,4 @@ class Api::V1::StopsController < ApplicationController
       end
     end
   end
-
-  def index_info_adder(raw_stop, stop_returned)
-    stop_returned[:to_next_point] = raw_stop.to_next_point
-  end
-
 end
