@@ -2,17 +2,18 @@ class Api::V1::StopsController < ApplicationController
   def index
     mile = params[:mile].to_f
     nobo = params[:nobo]
-    binding.pry
 
     if nobo == "false"
-      stops = Stop.where("miles_from_k >= ?", mile).order(:miles_from_k).limit(4).to_a
+      stops = Stop.where("miles_from_k >= ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }
+      stops = stops[0..3]
       prev_stop = Stop.where("miles_from_k < ?", mile).first
       this_stop = stops.first
       if prev_stop
         stops.unshift(prev_stop)
       end
     else
-      stops = Stop.where("miles_from_ga >= ?", mile).limit(4).to_a
+      stops = Stop.where("miles_from_ga >= ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }
+      stops = stops[0..3]
       prev_stop = Stop.where("miles_from_ga < ?", mile).last
       this_stop = stops.first
       if prev_stop
