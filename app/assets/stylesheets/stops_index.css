@@ -6,14 +6,13 @@ body {
 }
 
 .jumbotron {
-  /*cody-black-52701.jpg*/
-  /*jake-ingle-140416.jpg*/
   background: url('ales-krivec-2.jpg') no-repeat center;
   background-size: cover;
   background-position: center center;
   height: 80vh;
   position: relative;
   padding: 5%;
+  margin-top: -24px;
 }
 
 .jumbotron h1 {
@@ -238,4 +237,9 @@ button:focus {
 .icon-row {
   margin-top: auto;
   align-self: flex-start;
+}
+
+.bring-to-front {
+  position: relative;
+  z-index: 2;
 }

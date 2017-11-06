@@ -12,6 +12,7 @@ gem 'modernizr-rails'
 gem 'font-awesome-rails'
 gem 'draper'
 gem 'fontello_rails_converter'
+gem 'omniauth-google-oauth2'
 
 
 group :development do

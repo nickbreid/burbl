@@ -2,7 +2,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include FontAwesome::Rails::IconHelper
   include Draper::LazyHelpers
+  helper_method :current_user
 
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
 
   def distance_direction_adder(resource, obj)
     # resource may or may not have a distance/direction from trail. If it does, this method adds those props to obj
@@ -14,7 +18,6 @@ class ApplicationController < ActionController::Base
       obj[:direction_from_trail] = resource.direction_from_trail
     end
   end
-
 
   def icon_adder(obj)
     # obj should have a resource property. This method will add a resource_icon property (icon) that corresponds to the resource
