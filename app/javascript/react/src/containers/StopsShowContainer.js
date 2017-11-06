@@ -3,6 +3,7 @@ import BackButton from '../components/BackButton'
 import ShowInfo from '../components/ShowInfo'
 import ShowResources from '../components/ShowResources'
 import NearestWater from './NearestWater'
+import NearestCamps from './NearestCamps'
 
 class StopsShowContainer extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class StopsShowContainer extends Component {
       component: ''
     }
     this.handleWater = this.handleWater.bind(this)
+    this.handleCamps = this.handleCamps.bind(this)
   }
 
   componentDidMount() {
@@ -25,6 +27,10 @@ class StopsShowContainer extends Component {
 
   handleWater() {
     this.setState({ component: <NearestWater stop={this.state.stop}/> })
+  }
+
+  handleCamps() {
+    this.setState({ component: <NearestCamps stop={this.state.stop}/> })
   }
 
 
@@ -55,7 +61,7 @@ class StopsShowContainer extends Component {
               <h5>Find the nearest water sources</h5>
               <div className="button" onClick={this.handleWater}>Water</div>
               <h5>Find the nearest campsites</h5>
-              <div className="button">Campsites</div>
+              <div className="button" onClick={this.handleCamps}>Campsites</div>
               <h5>Add a comment about {this.state.stop.name}</h5>
               <div className="button">Comment</div>
             </div>
