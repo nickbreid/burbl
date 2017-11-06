@@ -4,14 +4,16 @@ class Api::V1::StopsController < ApplicationController
     nobo = params[:nobo]
 
     if nobo == "false"
-      stops = Stop.where("miles_from_k >= ?", mile).order(:miles_from_k).limit(4).to_a
+      stops = Stop.where("miles_from_k >= ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }.reverse
+      stops = stops[0..3]
       prev_stop = Stop.where("miles_from_k < ?", mile).first
       this_stop = stops.first
       if prev_stop
         stops.unshift(prev_stop)
       end
     else
-      stops = Stop.where("miles_from_ga >= ?", mile).limit(4).to_a
+      stops = Stop.where("miles_from_ga >= ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }
+      stops = stops[0..3]
       prev_stop = Stop.where("miles_from_ga < ?", mile).last
       this_stop = stops.first
       if prev_stop
@@ -36,6 +38,18 @@ class Api::V1::StopsController < ApplicationController
   def show
     nobo = params[:nobo]
     stop = Stop.find(params[:id])
+    mile = stop.miles_from_ga
+    query = params[:query]
+
+    if query == "water"
+      nobo_info = nearest_water_finder("nobo", mile)
+      sobo_info = nearest_water_finder("sobo", mile)
+    end
+
+    if query == "camps"
+      nobo_info = nearest_camps_finder("nobo", mile)
+      sobo_info = nearest_camps_finder("sobo", mile)
+    end
 
     stop_returned = nobo_or_sobo_setup(nobo, stop, stop_returned)
 
@@ -45,7 +59,7 @@ class Api::V1::StopsController < ApplicationController
 
     stop_resources_handler(stop_returned, stop_resources)
 
-    render json: { status: 'SUCCESS', message: 'Loaded show page stop data', data: stop_returned }, status: :ok
+    render json: { status: 'SUCCESS', message: 'Loaded show page stop data', data: stop_returned, nobo: nobo_info, sobo: sobo_info }, status: :ok
   end
 
 
@@ -70,11 +84,15 @@ class Api::V1::StopsController < ApplicationController
 
   def show_page_info_adder(raw_stop, stop_returned)
     if raw_stop.description
-      raw_stop[:description] = raw_stop.description
+      stop_returned[:description] = raw_stop.description
     end
 
     if raw_stop.town_access
-      raw_stop[:town_access] = raw_stop.town_access
+      stop_returned[:town_access] = raw_stop.town_access
+    end
+
+    if raw_stop.photo_url
+      stop_returned[:photo_url] = raw_stop.photo_url
     end
   end
 
@@ -92,5 +110,83 @@ class Api::V1::StopsController < ApplicationController
         stop_returned[:stop_resources] << stop_resources_returned
       end
     end
+  end
+
+  def nearest_water_finder(direction, mile)
+    if direction == "nobo"
+      counter = 0
+      i = 0
+      holder_array = []
+
+      stops = Stop.where("miles_from_ga >= ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }
+    elsif direction == "sobo"
+      counter = 0
+      i = 0
+      holder_array = []
+
+      mile = 2189.8 - mile.to_f
+      stops = Stop.where("miles_from_k >= ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }.reverse
+    end
+
+
+
+    loop do
+      if stops[i].stopresources
+        stop_resources = stops[i].stopresources
+        stop_resources.each do |stop_resource|
+          if stop_resource.resource_id == 20
+            stop_returned = {
+              id: stops[i].id,
+              miles_from_ga: stops[i].miles_from_ga,
+              miles_from_k: stops[i].miles_from_k,
+              name: stops[i].name
+            }
+            holder_array << stop_returned
+            counter += 1
+          end
+        end
+        i += 1
+        break if counter >= 3 || i >= stops.length
+      end
+    end
+    holder_array
+  end
+
+  def nearest_camps_finder(direction, mile)
+    if direction == "nobo"
+      counter = 0
+      i = 0
+      holder_array = []
+
+      stops = Stop.where("miles_from_ga >= ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }
+    elsif direction == "sobo"
+      counter = 0
+      i = 0
+      holder_array = []
+
+      mile = 2189.8 - mile.to_f
+      stops = Stop.where("miles_from_k >= ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }.reverse
+    end
+
+    loop do
+      if stops[i].stopresources
+        stop_resources = stops[i].stopresources
+        stop_resources.each do |stop_resource|
+          if stop_resource.resource_id == 2
+            stop_returned = {
+              id: stops[i].id,
+              miles_from_ga: stops[i].miles_from_ga,
+              miles_from_k: stops[i].miles_from_k,
+              name: stops[i].name
+            }
+            holder_array << stop_returned
+            counter += 1
+          end
+        end
+        i += 1
+        break if counter >= 3 || i >= stops.length
+      end
+    end
+    holder_array
   end
 end

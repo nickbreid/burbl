@@ -63,6 +63,13 @@ body {
   text-align: center;
 }
 
+.align-center-left {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: left;
+}
+
 .mile-marker {
   text-align: right;
   background-color: #BCE2CB;
