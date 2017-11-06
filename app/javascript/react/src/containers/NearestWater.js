@@ -14,7 +14,11 @@ class NearestWater extends Component {
   }
 
   componentDidMount() {
-    fetch(`/api/v1/stops/${this.state.stop.id}?query=water`)
+    fetch(`/api/v1/stops/${this.state.stop.id}?query=water`, {
+      credentials: 'same-origin',
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    })
     .then(response => response.json() )
     .then(body => {
       this.setState({ soboStops: body.sobo, noboStops: body.nobo })
