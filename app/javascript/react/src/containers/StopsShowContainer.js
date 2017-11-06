@@ -18,7 +18,11 @@ class StopsShowContainer extends Component {
 
   componentDidMount() {
     let stopId = this.props.params.id;
-    fetch(`/api/v1/stops/${stopId}`)
+    fetch(`/api/v1/stops/${stopId}`, {
+      credentials: 'same-origin',
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    })
     .then(response => response.json() )
     .then(body => {
       this.setState({ stop: body.data })

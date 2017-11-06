@@ -13,7 +13,11 @@ class NearestCamps extends Component {
   }
 
   componentDidMount() {
-    fetch(`/api/v1/stops/${this.state.stop.id}?query=camps`)
+    fetch(`/api/v1/stops/${this.state.stop.id}?query=camps`, {
+      credentials: 'same-origin',
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    })
     .then(response => response.json() )
     .then(body => {
       this.setState({ soboCamps: body.sobo, noboCamps: body.nobo })
