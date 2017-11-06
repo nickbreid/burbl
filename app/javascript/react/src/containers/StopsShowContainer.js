@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import BackButton from '../components/BackButton'
+import ShowInfo from '../components/ShowInfo'
+import ShowResources from '../components/ShowResources'
+import NearestWater from './NearestWater'
 
 class StopsShowContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      stop: {}
+      stop: {},
+      component: ''
     }
+    this.handleWater = this.handleWater.bind(this)
   }
 
   componentDidMount() {
@@ -14,80 +19,51 @@ class StopsShowContainer extends Component {
     fetch(`/api/v1/stops/${stopId}`)
     .then(response => response.json() )
     .then(body => {
-      console.log(body);
       this.setState({ stop: body.data })
     })
   }
 
+  handleWater() {
+    this.setState({ component: <NearestWater stop={this.state.stop}/> })
+  }
+
+
   render() {
-
-    let parsedResources, lastLocation, distDir;
-    let stopResources = this.state.stop.stop_resources;
-
-    // if the stop has resources
-    if (stopResources) {
-
-      // create array parsedResources by looping thru resources
-      parsedResources = stopResources.map(resource => {
-
-        // note the distance and direction_from_trail, if applicable
-        if (resource.distance_from_trail && resource.direction_from_trail) {
-          distDir = `${resource.direction_from_trail}-${resource.distance_from_trail}m`;
-
-          // don't output distDir if it's same as previous item. This allows adjacent resources to appear as a group
-          if (distDir !== lastLocation) {
-            lastLocation = distDir;
-          } else {
-            distDir = '';
-          }
-        }
-
-        // if the resource has an icon, display it
-        if (resource.resource_icon) {
-          function createMarkup() {
-            if (distDir !== undefined) {
-              if (distDir !== '') {
-                return {__html: `${distDir}</br> ${resource.resource_icon} - ${resource.resource}`};
-              } else {
-                return {__html: `${resource.resource_icon} - ${resource.resource}`};
-              }
-
-            } else {
-              return {__html: `${resource.resource_icon} - ${resource.resource}` }
-            }
-
-          }
-          return (
-            <li key={resource.id} dangerouslySetInnerHTML={createMarkup()} />
-          )
-        } else {
-          // if the resource doesn't have an icon, display its name
-          return (
-            <div>
-              <li key={resource.id}>{resource.resource}</li>
-            </div>
-          )
-        }
-      })
-    }
-
     return (
       <div className="grid-container">
         <BackButton />
         <div className="show-container">
           <div className="row">
-            <div className="small-12 medium-6 columns show-bg">
-              <h4>{this.state.stop.mile_marker}</h4>
-              <h2>{this.state.stop.name}</h2>
-              <p>{this.state.stop.description}</p>
-              <img className="show-photo" src={this.state.stop.photo_url}/>
+            <div className="small-12 medium-6 columns show-div">
+              <ShowInfo
+                mile={this.state.stop.mile_marker}
+                name={this.state.stop.name}
+                description={this.state.stop.description}
+                photo_url={this.state.stop.photo_url}
+              />
             </div>
-            <div className="small-12 medium-6 columns">
-              <ul>
-                {parsedResources}
-              </ul>
+            <div className="small-12 medium-3 columns resources-div">
+              <h5>Resources</h5>
+              <ShowResources
+                stopResources={this.state.stop.stop_resources}
+                lineBreak="</br>"
+                ulClass=""
+              />
+
+            </div>
+            <div className="small-12 medium-3 columns show-functions-div">
+              <h5>Find the nearest water sources</h5>
+              <div className="button" onClick={this.handleWater}>Water</div>
+              <h5>Find the nearest campsites</h5>
+              <div className="button">Campsites</div>
+              <h5>Add a comment about {this.state.stop.name}</h5>
+              <div className="button">Comment</div>
             </div>
           </div>
+        </div>
+
+        <div className="row show-row-2">
+          {this.state.component}
         </div>
       </div>
     )
