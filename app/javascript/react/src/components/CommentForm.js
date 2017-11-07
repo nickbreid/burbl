@@ -3,7 +3,7 @@ import React from 'react';
 const CommentForm = props => {
   return (
     <div>
-      <h3>Add a comment</h3>
+      <h2>Add a comment</h2>
       <input
         type="text"
         onChange={props.handleChange}
