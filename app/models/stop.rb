@@ -5,6 +5,7 @@ class Stop < ApplicationRecord
   validates :miles_from_k, numericality: { greater_than_or_equal_to: 593, less_than_or_equal_to: 684 }, uniqueness: true
   validates :elevation, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 3491 }, allow_nil: true
   has_many :stopresources
+  has_many :comments
 
   private
   def mile_must_be_in_range

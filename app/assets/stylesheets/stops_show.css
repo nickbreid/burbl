@@ -35,12 +35,15 @@ ul li {
   padding-top: 20px;
 }
 
-.small-tiles h4 {
-  padding-left: 10px;
+.reverse-bar {
+  text-align: center;
+  background-color: #48B;
+  color: white;
+  margin-left: 5px;
 }
 
-.small-tiles div.small-3 {
-  padding-left: 5px;
+.small-tiles h2 {
+  padding-left: 10px;
 }
 
 .mile-top {
@@ -55,6 +58,32 @@ ul li {
   font-size: 16px;
 }
 
-.left-padding {
-  padding-left: 15px;
+.right-padding {
+  padding-right: 25px;
+  padding-left: 10px;
+}
+
+.show-functions-div {
+  padding: 10px 20px;
+}
+
+ul {
+  margin-left: 0.9rem;
+}
+
+li {
+  list-style: none;
+}
+
+.show-info-hed {
+  padding-left: 0px;
+  font-size: 1.5rem;
+}
+
+.profile-pic {
+  background-color: green;
+  width: 55px;
+  height: 55px;
+  border-radius: 75px;
+  border: 2px solid green;
 }

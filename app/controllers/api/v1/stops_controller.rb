@@ -118,14 +118,14 @@ class Api::V1::StopsController < ApplicationController
       i = 0
       holder_array = []
 
-      stops = Stop.where("miles_from_ga >= ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }
+      stops = Stop.where("miles_from_ga > ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }
     elsif direction == "sobo"
       counter = 0
       i = 0
       holder_array = []
 
-      mile = 2189.8 - mile.to_f
-      stops = Stop.where("miles_from_k >= ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }.reverse
+      mile = (2189.8 - mile.to_f).round(1)
+      stops = Stop.where("miles_from_k > ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }.reverse
     end
 
 
@@ -158,14 +158,14 @@ class Api::V1::StopsController < ApplicationController
       i = 0
       holder_array = []
 
-      stops = Stop.where("miles_from_ga >= ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }
+      stops = Stop.where("miles_from_ga > ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }
     elsif direction == "sobo"
       counter = 0
       i = 0
       holder_array = []
 
       mile = 2189.8 - mile.to_f
-      stops = Stop.where("miles_from_k >= ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }.reverse
+      stops = Stop.where("miles_from_k > ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }.reverse
     end
 
     loop do

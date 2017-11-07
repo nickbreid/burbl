@@ -14,6 +14,13 @@
   </head>
 
   <body>
+    <div class="bring-to-front">
+      <% if current_user %>
+        <%= link_to "Sign out", signout_path, id: "sign_out" %>
+      <% else %>
+        <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
+      <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>

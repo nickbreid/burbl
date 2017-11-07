@@ -4,41 +4,97 @@ import ShowInfo from '../components/ShowInfo'
 import ShowResources from '../components/ShowResources'
 import NearestWater from './NearestWater'
 import NearestCamps from './NearestCamps'
+import CommentsContainer from './CommentsContainer'
+import CommentForm from '../components/CommentForm'
+import ShowButtons from '../components/ShowButtons'
 
 class StopsShowContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       stop: {},
-      component: ''
+      user: {},
+      comments: [],
+      stopId: this.props.params.id
     }
-    this.handleWater = this.handleWater.bind(this)
-    this.handleCamps = this.handleCamps.bind(this)
-  }
+
+    this.addNewComment = this.addNewComment.bind(this)
+    this.changeStop = this.changeStop.bind(this)
+    }
 
   componentDidMount() {
-    let stopId = this.props.params.id;
-    fetch(`/api/v1/stops/${stopId}`, {
+    window.scrollTo(0,0);
+
+    fetch(`/api/v1/stops/${this.props.params.id}`)
+    .then(response => response.json() )
+    .then(body => {
+      this.setState({ stop: body.data })
+    })
+
+    fetch(`/api/v1/comments?stop=${this.props.params.id}`)
+    .then(response => response.json() )
+    .then(body => this.setState({ comments: body.comments }))
+
+    fetch(`/api/v1/current_user.json`, {
       credentials: 'same-origin',
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     })
     .then(response => response.json() )
     .then(body => {
-      this.setState({ stop: body.data })
+      this.setState({ user: body })
     })
   }
 
-  handleWater() {
-    this.setState({ component: <NearestWater stop={this.state.stop}/> })
+  componentWillReceiveProps(nextProps) {
+    if (this.props.params.id !== nextProps.params.id) {
+      this.setState({ stopId: parseInt(nextProps.params.id) })
+    }
   }
 
-  handleCamps() {
-    this.setState({ component: <NearestCamps stop={this.state.stop}/> })
+  changeStop(stopId) {
+
+    fetch(`/api/v1/stops/${stopId}`)
+    .then(response => response.json() )
+    .then(body => {
+      this.setState({ stop: body.data })
+    })
+
+    fetch(`/api/v1/comments?stop=${stopId}`)
+    .then(response => response.json() )
+    .then(body => this.setState({ comments: body.comments }))
+  }
+
+
+  addNewComment(formPayload) {
+    fetch(`/api/v1/comments`, {
+      credentials: 'same-origin',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'post',
+      body: JSON.stringify(formPayload)
+    })
+    .then(response => response.json())
+    .then(body => {
+      let newComment = {
+        key: body.comment.comment.id,
+        id: body.comment.comment.id,
+        user: body.comment.user.name,
+        title: body.comment.comment.title,
+        body: body.comment.comment.body,
+        created_at: body.comment.comment_created_at
+      }
+      this.setState({
+        comments: this.state.comments.concat(newComment)
+      })
+    })
   }
 
 
   render() {
+    console.log(this.state.stop.id);
     return (
       <div className="grid-container">
         <BackButton />
@@ -59,22 +115,26 @@ class StopsShowContainer extends Component {
                 lineBreak="</br>"
                 ulClass=""
               />
-
             </div>
-            <div className="small-12 medium-3 columns show-functions-div">
-              <h5>Find the nearest water sources</h5>
-              <div className="button" onClick={this.handleWater}>Water</div>
-              <h5>Find the nearest campsites</h5>
-              <div className="button" onClick={this.handleCamps}>Campsites</div>
-              <h5>Add a comment about {this.state.stop.name}</h5>
-              <div className="button">Comment</div>
-            </div>
+            <ShowButtons
+              stop={this.state.stop.name}
+            />
           </div>
         </div>
-
-        <div className="row show-row-2">
-          {this.state.component}
-        </div>
+        <NearestWater
+          stopId={this.state.stop.id}
+          onClick={this.changeStop}
+        />
+        <NearestCamps
+          stopId={this.state.stop.id}
+          onClick={this.changeStop}
+        />
+        <CommentsContainer
+          stop={this.state.stop}
+          username={this.state.user}
+          addComment={this.addNewComment}
+          comments={this.state.comments}
+        />
       </div>
     )
   }

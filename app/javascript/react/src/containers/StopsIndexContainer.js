@@ -72,7 +72,6 @@ class StopsIndexContainer extends Component {
       })
       .then(response => response.json() )
       .then(body => {
-        console.log(body);
         this.setState({
           stops: body.data,
           prevStop: body.prev_stop,
