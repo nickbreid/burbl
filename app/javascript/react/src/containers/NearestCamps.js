@@ -49,13 +49,13 @@ class NearestCamps extends Component {
         <div className="small-12">
           <h2>Campsites and shelters</h2>
         </div>
-        <div className="small-12 medium-6">
+        <div className="small-12 medium-6 right-padding">
           <h4>North</h4>
           <ul>
             {noboCampTiles}
           </ul>
         </div>
-        <div className="small-12 medium-6 left-padding">
+        <div className="small-12 medium-6 right-padding">
           <h4>South</h4>
           <ul>
             {soboCampTiles}

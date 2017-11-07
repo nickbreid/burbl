@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :stops, only: [:index, :show]
       get "current_user" => "users#current"
+      resources :comments, only: [:index, :create, :new]
     end
   end
 

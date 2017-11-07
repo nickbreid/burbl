@@ -9,4 +9,5 @@ class User < ActiveRecord::Base
       user.save!
     end
   end
+  has_many :comments
 end
