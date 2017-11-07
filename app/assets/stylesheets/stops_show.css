@@ -35,7 +35,7 @@ ul li {
   padding-top: 20px;
 }
 
-.small-tiles h4 {
+.reverse-bar {
   text-align: center;
   background-color: #48B;
   color: white;
@@ -78,10 +78,6 @@ li {
 .show-info-hed {
   padding-left: 0px;
   font-size: 1.5rem;
-}
-
-.comments-ul {
-  padding-top: 30px;
 }
 
 .profile-pic {

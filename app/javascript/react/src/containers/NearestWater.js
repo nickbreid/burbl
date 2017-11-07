@@ -7,18 +7,21 @@ class NearestWater extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      stop: this.props.stop,
+      stopId: this.props.stopId,
       soboStops: [],
       noboStops: []
     }
   }
 
-  componentDidMount() {
-    fetch(`/api/v1/stops/${this.state.stop.id}?query=water`)
-    .then(response => response.json() )
-    .then(body => {
-      this.setState({ soboStops: body.sobo, noboStops: body.nobo })
-    })
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.stopId !== undefined && nextProps.stopId !== this.props.stopId) {
+      console.log("fetching: ", `/api/v1/stops/${nextProps.stopId}?query=water`);
+      fetch(`/api/v1/stops/${nextProps.stopId}?query=water`)
+      .then(response => response.json() )
+      .then(body => {
+        this.setState({ soboStops: body.sobo, noboStops: body.nobo })
+      })
+    }
   }
 
   render() {
@@ -31,6 +34,7 @@ class NearestWater extends Component {
           mileMarker={stop.miles_from_ga}
           name={stop.name}
           tileClass="water"
+          onClick={this.props.onClick}
         />
       )
     })
@@ -43,23 +47,24 @@ class NearestWater extends Component {
           mileMarker={stop.miles_from_ga}
           name={stop.name}
           tileClass="water"
+          onClick={this.props.onClick}
         />
       )
     })
 
     return (
-      <div className="row small-tiles">
+      <div className="row small-tiles" id="water">
         <div className="small-12">
           <h2>Water sources</h2>
         </div>
         <div className="small-12 medium-6 right-padding">
-          <h4>North</h4>
+          <h4 className="reverse-bar">North</h4>
           <ul>
             {noboWaterTiles}
           </ul>
         </div>
         <div className="small-12 medium-6 right-padding">
-          <h4>South</h4>
+          <h4 className="reverse-bar">South</h4>
           <ul>
             {soboWaterTiles}
           </ul>
