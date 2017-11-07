@@ -12,6 +12,7 @@ class NearestCamps extends Component {
     }
   }
 
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.stopId !== undefined && nextProps.stopId !== this.props.stopId) {
       console.log("fetching: ", `/api/v1/stops/${nextProps.stopId}?query=camps`);
