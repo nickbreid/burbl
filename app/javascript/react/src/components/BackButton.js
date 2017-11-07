@@ -1,10 +1,12 @@
 import React from 'react';
-import { browserHistory } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 
-const BackButton = () => {
+const BackButton = props => {
   return(
     <div>
-      <div className="button" onClick={browserHistory.goBack}>Back</div>
+      <Link to={`/stops?mile=${props.mile}`}>
+        <div className="button">Home</div>
+      </Link>
     </div>
   )
 }

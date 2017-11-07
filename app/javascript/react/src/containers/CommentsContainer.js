@@ -71,19 +71,19 @@ class CommentsContainer extends Component {
       return (
         <div className="row small-tiles">
           <div className="small-12 columns" id="comments">
-            <div className="small-12 medium-9 columns">
-              <h3>Comments</h3>
-              <ul className="comments-ul">
-                {parsedComments}
-              </ul>
-            </div>
-            <div className="small-12 medium-3 columns">
+            <div className="small-12 medium-3 columns comment-form">
               <CommentForm
                 handleChange={this.handleChange}
                 body={this.state.body}
                 title={this.state.title}
                 handleSubmit={this.handleSubmit}
               />
+            </div>
+            <div className="small-12 medium-9 columns">
+              <h2>Comments</h2>
+              <ul className="comments-ul">
+                {parsedComments}
+              </ul>
             </div>
         </div>
         </div>
@@ -93,14 +93,14 @@ class CommentsContainer extends Component {
       return (
         <div className="row small-tiles">
           <div className="small-12 columns" id="comments">
+            <div className="small-12 medium-3 columns comment-form">
+              <h3>You must sign in to leave a comment.</h3>
+            </div>
             <div className="small-12 medium-9 columns comments-ul">
               <h3>Comments</h3>
               <ul className="comments-ul">
                 {parsedComments}
               </ul>
-            </div>
-            <div className="small-12 medium-3 columns">
-              <h3>You must sign in to leave a comment.</h3>
             </div>
           </div>
         </div>

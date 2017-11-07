@@ -53,7 +53,7 @@ class NearestCamps extends Component {
     return (
       <div className="row small-tiles" id="campsites">
         <div className="small-12">
-          <h2>Campsites and shelters</h2>
+          <h2>Nearest campsites and shelters</h2>
         </div>
         <div className="small-12 medium-6 right-padding">
           <h4 className="reverse-bar">North</h4>

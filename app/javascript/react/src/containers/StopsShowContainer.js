@@ -94,11 +94,12 @@ class StopsShowContainer extends Component {
 
 
   render() {
-    console.log(this.state.stop.id);
     return (
       <div className="grid-container">
-        <BackButton />
         <div className="show-container">
+          <div className="row">
+            <BackButton mile={this.state.stop.mile_marker} />
+          </div>
           <div className="row">
             <div className="small-12 medium-6 columns show-div">
               <ShowInfo

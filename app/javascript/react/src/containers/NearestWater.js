@@ -55,7 +55,7 @@ class NearestWater extends Component {
     return (
       <div className="row small-tiles" id="water">
         <div className="small-12">
-          <h2>Water sources</h2>
+          <h2>Nearest water sources</h2>
         </div>
         <div className="small-12 medium-6 right-padding">
           <h4 className="reverse-bar">North</h4>

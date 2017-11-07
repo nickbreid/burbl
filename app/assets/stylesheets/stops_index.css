@@ -1,8 +1,17 @@
-@import url('https://fonts.googleapis.com/css?family=Averia+Libre|Lato');
+@import url('https://fonts.googleapis.com/css?family=Averia+Libre|Lato|Open+Sans+Condensed:300');
 
 body {
   background-color: #C9D5E2;
   height: 100%;
+  font-family: 'Lato', sans-serif;
+}
+
+h1 {
+  font-family: 'Averia Libre', cursive;
+}
+
+h2 {
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 
 .jumbotron {
@@ -12,7 +21,7 @@ body {
   height: 80vh;
   position: relative;
   padding: 5%;
-  margin-top: -24px;
+  margin-top: -29px;
 }
 
 .jumbotron h1 {
@@ -242,4 +251,12 @@ button:focus {
 .bring-to-front {
   position: relative;
   z-index: 2;
+  text-align: right;
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  padding-right: 10px;
+  padding-top: 5px;
+}
+
+.bring-to-front a {
+  color: black;
 }

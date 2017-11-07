@@ -40,6 +40,7 @@ ul li {
   background-color: #48B;
   color: white;
   margin-left: 5px;
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 
 .small-tiles h2 {
@@ -77,7 +78,7 @@ li {
 
 .show-info-hed {
   padding-left: 0px;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 .profile-pic {
@@ -86,4 +87,32 @@ li {
   height: 55px;
   border-radius: 75px;
   border: 2px solid green;
+  margin-left: 15px;
+}
+
+.comment-form {
+  border-right: 1px solid black;
+}
+
+.comment-form:after {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 90%;
+  top: 5%;
+}
+
+.comment-user {
+  background-color: #bdbdbd;
+  padding: 10px 0px 20px 10px;
+}
+
+.comment-body {
+  background-color: #d7d7d7;
+  padding: 10px 0px 20px 10px;
+}
+
+.comment-tile {
+  margin-bottom: 5px;
+
 }

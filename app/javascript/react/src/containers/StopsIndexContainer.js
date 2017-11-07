@@ -48,6 +48,10 @@ class StopsIndexContainer extends Component {
 
   // fetch stops data
   componentDidMount() {
+    if (this.props.location.query.mile && this.props.location.query.mile !== this.state.mile) {
+      this.setState({ mile: this.props.location.query.mile })
+    }
+
     fetch(`/api/v1/stops.json`, {
       credentials: 'same-origin',
       method: 'GET',
