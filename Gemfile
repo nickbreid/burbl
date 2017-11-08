@@ -22,6 +22,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'launchy', require: false
