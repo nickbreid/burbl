@@ -4,6 +4,7 @@ import StopTile from '../components/StopTile.js'
 import StopTileLabels from '../components/StopTileLabels.js'
 import MileField from '../components/MileField.js'
 import NoboToggle from '../components/NoboToggle.js'
+import SignInButton from '../components/SignInButton.js'
 
 class StopsIndexContainer extends Component {
   constructor(props) {
@@ -118,6 +119,7 @@ class StopsIndexContainer extends Component {
 
     return (
       <div className="grid-container">
+        <SignInButton />
         <div className="jumbotron">
           <div className="row">
             <div className="small-12 medium-9 columns">

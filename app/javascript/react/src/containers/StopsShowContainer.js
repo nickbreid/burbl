@@ -7,6 +7,7 @@ import NearestCamps from './NearestCamps'
 import CommentsContainer from './CommentsContainer'
 import CommentForm from '../components/CommentForm'
 import ShowButtons from '../components/ShowButtons'
+import SignInButton from '../components/SignInButton'
 
 class StopsShowContainer extends Component {
   constructor(props) {
@@ -99,6 +100,7 @@ class StopsShowContainer extends Component {
         <div className="show-container">
           <div className="row">
             <BackButton mile={this.state.stop.mile_marker} />
+            <SignInButton user={this.state.user} />
           </div>
           <div className="row">
             <div className="small-12 medium-6 columns show-div">
