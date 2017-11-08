@@ -9,7 +9,8 @@ const StopTile = props => {
       <li key={props.mileMarker}>
         <div className="row align-middle stop-tile">
           <div className={`small-3 columns mile-marker align-center ${mileClass}`}>
-              <h3>{props.mileMarker}</h3>
+              <p className="mile-top">{props.mileMarker}</p>
+              <p className="mile-bottom">{distance_from_here(props.thisMile, props.mileMarker)}</p>
           </div>
           <div className={`small-9 columns stop-name ${nameClass}`}>
             <Link to={`/stops/${props.id}`}>
@@ -22,6 +23,17 @@ const StopTile = props => {
         </div>
       </li>
     )
+  }
+
+  let distance_from_here = (thisMile, mileMarker) => {
+    let diff = thisMile - mileMarker;
+    diff = Math.abs(diff).toFixed(1)
+
+    if (diff !== "0.0") {
+      return diff
+    } else {
+      return ""
+    }
   }
 
   let parsedResources, lastLocation, distDir, waterTile, campTile;

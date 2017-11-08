@@ -3,7 +3,7 @@
 body {
   background-color: #C9D5E2;
   height: 100%;
-  font-family: 'Lato', sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 }
 
 h1 {
@@ -32,6 +32,7 @@ h2 {
 @media screen and (max-width: 640px) {
   .jumbotron h1 {
     margin-top: 88px;
+    font-size: 2.5rem;
   }
 }
 
@@ -227,7 +228,7 @@ button:focus {
 }
 
 .stops-container {
-  height: 600px;
+  min-height: 210px;
 }
 
 .camp-tile-name {
