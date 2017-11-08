@@ -100,10 +100,10 @@ class StopsIndexContainer extends Component {
           key={stop.id}
           mileMarker={stop.mile_marker}
           name={stop.name}
-          toNextPoint={stop.to_next_point}
           stopResources={stop.stop_resources}
           prevStop={prevStop}
           thisStop={thisStop}
+          thisMile={this.state.mile}
         />
       )
     })
@@ -129,6 +129,9 @@ class StopsIndexContainer extends Component {
         </div>
         <div className="stops-container">
           <div className="row input-row align-items-bottom">
+            <div className="small-12 medium-6 columns">
+              <p>Choose a direction and mile-marker. The limits within Massachusetts are {ctBorder} to {vtBorder}.</p>
+            </div>
             <NoboToggle
               toggleNobo={this.toggleNobo}
             />
@@ -138,9 +141,6 @@ class StopsIndexContainer extends Component {
               handlePlus={this.handlePlus}
               handleMinus={this.handleMinus}
             />
-            <div className="small-12 medium-6 columns">
-              <p>Choose a direction and mile-marker. The limits within Massachusetts are {ctBorder} to {vtBorder}.</p>
-            </div>
           </div>
           <ul>
             <StopTileLabels />
