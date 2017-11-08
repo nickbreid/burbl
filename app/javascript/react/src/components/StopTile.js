@@ -30,7 +30,7 @@ const StopTile = props => {
     diff = Math.abs(diff).toFixed(1)
 
     if (diff !== "0.0") {
-      return diff
+      return diff + "m away"
     } else {
       return ""
     }

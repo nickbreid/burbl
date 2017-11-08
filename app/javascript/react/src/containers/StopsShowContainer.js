@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import HomeButton from '../components/HomeButton'
 import ShowInfo from '../components/ShowInfo'
 import ShowResources from '../components/ShowResources'
@@ -8,6 +9,7 @@ import CommentsContainer from './CommentsContainer'
 import CommentForm from '../components/CommentForm'
 import ShowButtons from '../components/ShowButtons'
 import SignInButton from '../components/SignInButton'
+import Footer from '../components/Footer'
 
 class StopsShowContainer extends Component {
   constructor(props) {
@@ -137,6 +139,7 @@ class StopsShowContainer extends Component {
           addComment={this.addNewComment}
           comments={this.state.comments}
         />
+        <Footer />
       </div>
     )
   }

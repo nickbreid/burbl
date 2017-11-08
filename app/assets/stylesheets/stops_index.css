@@ -264,6 +264,9 @@ button:focus {
   background: none;
   position: relative;
   z-index: 5;
+  width: 98%;
+  margin: auto;
+  margin-bottom: -5px;
 }
 
 .top-bar a {
@@ -272,4 +275,20 @@ button:focus {
 
 .top-bar, .top-bar ul {
   background-color: transparent;
+}
+
+.footer {
+  background-color: #2F7149;
+  justify-content: center;
+  color: white;
+  margin-top: 70px;
+}
+
+.footer-box {
+  padding: 20px;
+}
+
+.footer-link a {
+  color: white;
+  border-bottom: 1px dotted white;
 }
