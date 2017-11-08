@@ -29,6 +29,12 @@ h2 {
   font-family: 'Averia Libre', cursive;
 }
 
+@media screen and (max-width: 640px) {
+  .jumbotron h1 {
+    margin-top: 88px;
+  }
+}
+
 .jumbotron h2 {
   font-family: 'Lato', sans-serif;
 }
