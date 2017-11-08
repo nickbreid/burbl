@@ -5,6 +5,7 @@ import StopTileLabels from '../components/StopTileLabels.js'
 import MileField from '../components/MileField.js'
 import NoboToggle from '../components/NoboToggle.js'
 import SignInButton from '../components/SignInButton.js'
+import Footer from '../components/Footer.js'
 
 class StopsIndexContainer extends Component {
   constructor(props) {
@@ -118,34 +119,37 @@ class StopsIndexContainer extends Component {
     }
 
     return (
-      <div className="grid-container">
-        <div className="jumbotron">
-          <div className="row">
-            <div className="small-12 medium-9 columns">
-              <h1>Be resourceful.</h1>
-              <h2>Find water sources, campsites, parking and more along the Appalachian Trail.</h2>
+      <div>
+        <div className="grid-container">
+          <div className="jumbotron">
+            <div className="row">
+              <div className="small-12 medium-9 columns">
+                <h1>Be resourceful.</h1>
+                <h2>Find water sources, campsites, parking and more along the Appalachian Trail.</h2>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="stops-container">
-          <div className="row input-row align-items-bottom">
-            <div className="small-12 medium-6 columns">
-              <p>Choose a direction and mile-marker. The limits within Massachusetts are {ctBorder} to {vtBorder}.</p>
+          <div className="stops-container">
+            <div className="row input-row align-items-bottom">
+              <div className="small-12 medium-6 columns">
+                <p>Choose a direction and mile-marker. The limits within Massachusetts are {ctBorder} to {vtBorder}.</p>
+              </div>
+              <NoboToggle
+                toggleNobo={this.toggleNobo}
+              />
+              <MileField
+                mile={this.state.mile}
+                handleChange={this.handleChange}
+                handlePlus={this.handlePlus}
+                handleMinus={this.handleMinus}
+              />
             </div>
-            <NoboToggle
-              toggleNobo={this.toggleNobo}
-            />
-            <MileField
-              mile={this.state.mile}
-              handleChange={this.handleChange}
-              handlePlus={this.handlePlus}
-              handleMinus={this.handleMinus}
-            />
+            <ul>
+              <StopTileLabels />
+              {parsedStops}
+            </ul>
           </div>
-          <ul>
-            <StopTileLabels />
-            {parsedStops}
-          </ul>
+          <Footer />
         </div>
       </div>
     )
