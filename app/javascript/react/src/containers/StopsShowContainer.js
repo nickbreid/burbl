@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BackButton from '../components/BackButton'
+import HomeButton from '../components/HomeButton'
 import ShowInfo from '../components/ShowInfo'
 import ShowResources from '../components/ShowResources'
 import NearestWater from './NearestWater'
@@ -99,8 +99,7 @@ class StopsShowContainer extends Component {
       <div className="grid-container">
         <div className="show-container">
           <div className="row">
-            <BackButton mile={this.state.stop.mile_marker} />
-            <SignInButton user={this.state.user} />
+            <HomeButton mile={this.state.stop.mile_marker} />
           </div>
           <div className="row">
             <div className="small-12 medium-6 columns show-div">

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BackButton from '../components/BackButton';
+import HomeButton from '../components/HomeButton';
 import CommentForm from '../components/CommentForm'
 import CommentTile from '../components/CommentTile'
 

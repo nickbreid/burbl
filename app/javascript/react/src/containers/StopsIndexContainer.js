@@ -119,7 +119,6 @@ class StopsIndexContainer extends Component {
 
     return (
       <div className="grid-container">
-        <SignInButton />
         <div className="jumbotron">
           <div className="row">
             <div className="small-12 medium-9 columns">

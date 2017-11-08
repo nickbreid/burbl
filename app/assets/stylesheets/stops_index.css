@@ -7,7 +7,7 @@ body {
 }
 
 h1 {
-  font-family: 'Averia Libre', cursive;
+  font-family: 'Averia Libre', serif;
 }
 
 h2 {
@@ -21,7 +21,8 @@ h2 {
   height: 80vh;
   position: relative;
   padding: 5%;
-  margin-top: -29px;
+  margin-top: -88px;
+  padding-top: 9%;
 }
 
 .jumbotron h1 {
@@ -248,16 +249,20 @@ button:focus {
   align-self: flex-start;
 }
 
-.bring-to-front {
+.nav {
+  background: none;
+}
+
+.top-bar {
+  background: none;
   position: relative;
-  z-index: 2;
-  text-align: right;
-  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-  padding-right: 10px;
-  padding-top: 5px;
+  z-index: 5;
+}
+
+.top-bar a {
   color: black;
 }
 
-.bring-to-front a {
-  color: black;
+.top-bar, .top-bar ul {
+  background-color: transparent;
 }
