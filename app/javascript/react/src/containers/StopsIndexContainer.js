@@ -4,6 +4,7 @@ import StopTile from '../components/StopTile.js'
 import StopTileLabels from '../components/StopTileLabels.js'
 import MileField from '../components/MileField.js'
 import NoboToggle from '../components/NoboToggle.js'
+import SignInButton from '../components/SignInButton.js'
 
 class StopsIndexContainer extends Component {
   constructor(props) {

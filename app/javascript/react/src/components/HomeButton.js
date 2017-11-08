@@ -1,7 +1,7 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router'
 
-const BackButton = props => {
+const HomeButton = props => {
   return(
     <div>
       <Link to={`/stops?mile=${props.mile}`}>
@@ -11,4 +11,4 @@ const BackButton = props => {
   )
 }
 
-export default BackButton;
+export default HomeButton;
