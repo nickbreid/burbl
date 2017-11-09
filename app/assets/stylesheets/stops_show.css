@@ -107,3 +107,11 @@ li {
 .sobo-mile {
   color: #3d3d3d;
 }
+
+.small-water-tile-name {
+  background: linear-gradient(#FFF 50%, rgba(255,255,255,.5) 0) 0 0,
+  radial-gradient(circle closest-side, #FFF 75%, rgba(255,255,255,0) 0) 0 0,
+  radial-gradient(circle closest-side, #FFF 75%, rgba(255,255,255,0) 0) 65px 0 #48B;
+  background-size: 18px 170%;
+  background-repeat:repeat-x;
+}
