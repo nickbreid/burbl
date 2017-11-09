@@ -128,25 +128,25 @@ class Api::V1::StopsController < ApplicationController
       stops = Stop.where("miles_from_k > ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }.reverse
     end
 
-
-
-    loop do
-      if stops[i].stopresources
-        stop_resources = stops[i].stopresources
-        stop_resources.each do |stop_resource|
-          if stop_resource.resource_id == 20
-            stop_returned = {
-              id: stops[i].id,
-              miles_from_ga: stops[i].miles_from_ga,
-              miles_from_k: stops[i].miles_from_k,
-              name: stops[i].name
-            }
-            holder_array << stop_returned
-            counter += 1
+    unless stops[i].nil?
+      loop do
+        if stops[i].stopresources
+          stop_resources = stops[i].stopresources
+          stop_resources.each do |stop_resource|
+            if stop_resource.resource_id == 20
+              stop_returned = {
+                id: stops[i].id,
+                miles_from_ga: stops[i].miles_from_ga,
+                miles_from_k: stops[i].miles_from_k,
+                name: stops[i].name
+              }
+              holder_array << stop_returned
+              counter += 1
+            end
           end
+          i += 1
+          break if counter >= 3 || i >= stops.length
         end
-        i += 1
-        break if counter >= 3 || i >= stops.length
       end
     end
     holder_array
@@ -168,25 +168,28 @@ class Api::V1::StopsController < ApplicationController
       stops = Stop.where("miles_from_k > ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }.reverse
     end
 
-    loop do
-      if stops[i].stopresources
-        stop_resources = stops[i].stopresources
-        stop_resources.each do |stop_resource|
-          if stop_resource.resource_id == 2
-            stop_returned = {
-              id: stops[i].id,
-              miles_from_ga: stops[i].miles_from_ga,
-              miles_from_k: stops[i].miles_from_k,
-              name: stops[i].name
-            }
-            holder_array << stop_returned
-            counter += 1
+    unless stops[i].nil?
+      loop do
+        if stops[i].stopresources
+          stop_resources = stops[i].stopresources
+          stop_resources.each do |stop_resource|
+            if stop_resource.resource_id == 2
+              stop_returned = {
+                id: stops[i].id,
+                miles_from_ga: stops[i].miles_from_ga,
+                miles_from_k: stops[i].miles_from_k,
+                name: stops[i].name
+              }
+              holder_array << stop_returned
+              counter += 1
+            end
           end
+          i += 1
+          break if counter >= 3 || i >= stops.length
         end
-        i += 1
-        break if counter >= 3 || i >= stops.length
       end
     end
     holder_array
   end
+
 end
