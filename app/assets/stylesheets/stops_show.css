@@ -14,7 +14,8 @@ ul li {
 }
 
 .mile-label {
-  text-decoration: underline;
+  border-bottom: 1px solid black;
+  display: inline-block;
 }
 
 .resources-div {
@@ -82,19 +83,6 @@ li {
   font-size: 2rem;
 }
 
-.profile-pic {
-  background-color: green;
-  width: 55px;
-  height: 55px;
-  border-radius: 75px;
-  border: 2px solid green;
-  margin-left: 15px;
-}
-
-.comment-form {
-  border-right: 1px solid black;
-}
-
 .comment-form:after {
   content: '';
   display: block;
@@ -104,14 +92,18 @@ li {
 }
 
 .comment-user {
-  padding: 10px 0px 20px 10px;
+  padding: 10px 0px 20px 0px;
 }
 
 .comment-body {
-  padding: 10px 0px 20px 10px;
+  padding: 10px 0px 0px 10px;
 }
 
 .comment-tile {
   margin-bottom: 5px;
+  padding-left: 0px;
+}
 
+.sobo-mile {
+  color: #3d3d3d;
 }

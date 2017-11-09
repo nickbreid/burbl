@@ -1,17 +1,17 @@
-@import url('https://fonts.googleapis.com/css?family=Averia+Libre|Lato|Open+Sans+Condensed:300');
+@import url('https://fonts.googleapis.com/css?family=Averia+Libre|Open+Sans+Condensed:300|Quicksand');
 
 body {
   background-color: #C9D5E2;
   height: 100%;
-  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: 'Quicksand', Helvetica, Roboto, Arial, sans-serif;
 }
 
 h1 {
   font-family: 'Averia Libre', serif;
 }
 
-h2 {
-  font-family: 'Open Sans Condensed', sans-serif;
+h2, h3, h4, h5 {
+  font-family: 'Quicksand', sans-serif;
 }
 
 .jumbotron {
@@ -25,19 +25,11 @@ h2 {
   padding-top: 9%;
 }
 
-.jumbotron h1 {
-  font-family: 'Averia Libre', cursive;
-}
-
 @media screen and (max-width: 640px) {
   .jumbotron h1 {
     margin-top: 88px;
     font-size: 2.5rem;
   }
-}
-
-.jumbotron h2 {
-  font-family: 'Lato', sans-serif;
 }
 
 .input-row {

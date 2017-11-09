@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import HomeButton from '../components/HomeButton';
+
+import HomeButton from '../components/HomeButton'
+import SignInButton from '../components/SignInButton'
 import CommentForm from '../components/CommentForm'
 import CommentTile from '../components/CommentTile'
 
@@ -64,6 +66,8 @@ class CommentsContainer extends Component {
           />
         )
       })
+    } else {
+      parsedComments = <p>Be the first to leave a comment.</p>
     }
 
 
@@ -94,7 +98,8 @@ class CommentsContainer extends Component {
         <div className="row small-tiles">
           <div className="small-12 columns" id="comments">
             <div className="small-12 medium-3 columns comment-form">
-              <h3>You must sign in to leave a comment.</h3>
+              <p>You must sign in to leave a comment.</p>
+              <SignInButton />
             </div>
             <div className="small-12 medium-9 columns comments-ul">
               <h3>Comments</h3>
