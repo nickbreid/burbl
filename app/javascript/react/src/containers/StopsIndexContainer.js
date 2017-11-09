@@ -15,37 +15,86 @@ class StopsIndexContainer extends Component {
       mile: 1505.9,
       nobo: true,
       prevStop: {},
-      thisStop: {}
+      thisStop: {},
+      errors: ''
     }
     this.toggleNobo = this.toggleNobo.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handlePlus = this.handlePlus.bind(this)
     this.handleMinus = this.handleMinus.bind(this)
+    this.validateMile = this.validateMile.bind(this)
   }
 
   // swap direction from north to south
   toggleNobo() {
-    let floatMile = parseFloat(this.state.mile)
-    let newMile = (2189.8 - floatMile)
+    let newMile = (2189.8 - this.state.mile)
     this.setState({
       nobo: !this.state.nobo,
-      mile: newMile.toFixed(1)
+      mile: parseFloat(newMile.toFixed(1))
      })
   }
 
   // updates state on MileField change
   handleChange(event) {
-    this.setState({ mile: event.target.value })
+    let newMile = parseFloat(event.target.value);
+    this.validateMile(newMile, this.state.nobo);
+    this.setState({ mile: newMile })
   }
 
+  // button pushed to increase mile by 1
   handlePlus() {
     let milePlusOne = parseFloat(this.state.mile)+1
-    this.setState({ mile: milePlusOne.toFixed(1) })
+    let newMile = milePlusOne.toFixed(1)
+    if (this.validateMile(newMile, this.state.nobo) && !this.state.errors) {
+      this.setState({ mile: parseFloat(milePlusOne.toFixed(1))
+      })
+    }
   }
 
+  // button pushed to decrease mile by 1
   handleMinus() {
     let mileMinusOne = parseFloat(this.state.mile)-1
-    this.setState({ mile: mileMinusOne.toFixed(1) })
+    let newMile = mileMinusOne.toFixed(1)
+
+    if (this.validateMile(newMile, this.state.nobo) && !this.state.errors) {
+      this.setState({ mile: parseFloat(mileMinusOne.toFixed(1))
+      })
+    }
+  }
+
+  validateMile(mile, directionIsNobo) {
+    if (directionIsNobo == true && mile < 1505.9) {
+      let newError = "For northbounders, any mile less than 1505.9 is south of Massachusetts. Please enter a valid mile marker.";
+      this.setState({
+        errors: newError,
+        mile: 1505.9
+       });
+      return false;
+    } else if (directionIsNobo == true && mile > 1596.3) {
+      let newError = "For northbounders, any mile greater than 1596.3 is north of Massachusetts. Please enter a valid mile marker.";
+      this.setState({
+        errors: newError,
+        mile: 1596.3
+       });
+      return false;
+    } else if (directionIsNobo == false && mile > 683.9) {
+      let newError = "For southbounders, any mile greater than 683.9 is south of Massachusetts. Please enter a valid mile marker.";
+      this.setState({
+        errors: newError,
+        mile: 683.9
+       });
+      return false;
+    } else if (directionIsNobo == false && mile < 593.5) {
+      let newError = "For southbounders, any mile less than 593.5 is north of Massachusetts. Please enter a valid mile marker.";
+      this.setState({
+        errors: newError,
+        mile: 593.5
+       });
+      return false;
+    } else {
+      this.setState({ errors: '' })
+      return true;
+    }
   }
 
   // fetch stops data
@@ -118,6 +167,11 @@ class StopsIndexContainer extends Component {
       vtBorder = 593.5;
     }
 
+    let errorDiv;
+    if (this.state.errors) {
+      errorDiv = <div className="callout alert">{this.state.errors}</div>
+    }
+
     return (
       <div>
         <div className="grid-container">
@@ -133,6 +187,7 @@ class StopsIndexContainer extends Component {
             <div className="row input-row align-items-bottom">
               <div className="small-12 medium-6 columns">
                 <p>Choose a direction and mile-marker. The limits within Massachusetts are {ctBorder} to {vtBorder}.</p>
+                {errorDiv}
               </div>
               <NoboToggle
                 toggleNobo={this.toggleNobo}

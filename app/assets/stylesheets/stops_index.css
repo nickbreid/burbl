@@ -292,3 +292,13 @@ button:focus {
   color: white;
   border-bottom: 1px dotted white;
 }
+
+.callout {
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  z-index: 15;
+  font-size: 14px;
+  padding: 0.5rem;
+}
