@@ -15,8 +15,8 @@ const SmallStopTile = props => {
       <li key={props.mileMarker}>
         <div className="row align-middle stop-tile">
           <div className={`small-3 columns mile-marker align-center ${mileClass}`}>
-              <p className="mile-top">{props.mileMarker}</p>
-              <p className="mile-bottom">{soboMileMarker.toFixed(1)}</p>
+              <p className="mile-top">{props.distance}</p>
+              <p className="mile-bottom">miles away</p>
           </div>
           <div className={`small-9 columns stop-name align-center-left ${nameClass}`}>
             <Link to={`/stops/${props.id}`}>

@@ -25,13 +25,15 @@ class NearestCamps extends Component {
   }
 
   render() {
-
+    let distance;
     let noboCampTiles = this.state.noboStops.map((stop) => {
+      distance = Math.abs(this.props.stopMile - stop.miles_from_ga)
        return (
         <SmallStopTile
           id={stop.id}
           key={stop.id}
           mileMarker={stop.miles_from_ga}
+          distance={parseFloat(distance).toFixed(1)}
           name={stop.name}
           onClick={this.props.onClick}
         />
@@ -39,11 +41,13 @@ class NearestCamps extends Component {
     })
 
     let soboCampTiles = this.state.soboStops.map((stop) => {
+      distance = Math.abs(this.props.stopMile - stop.miles_from_ga)
        return (
         <SmallStopTile
           id={stop.id}
           key={stop.id}
           mileMarker={stop.miles_from_ga}
+          distance={parseFloat(distance).toFixed(1)}
           name={stop.name}
           onClick={this.props.onClick}
         />
