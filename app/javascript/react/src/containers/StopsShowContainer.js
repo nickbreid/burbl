@@ -108,6 +108,7 @@ class StopsShowContainer extends Component {
               <ShowInfo
                 mile={this.state.stop.mile_marker}
                 name={this.state.stop.name}
+                townAccess={this.state.stop.town_access}
                 description={this.state.stop.description}
                 photo_url={this.state.stop.photo_url}
               />

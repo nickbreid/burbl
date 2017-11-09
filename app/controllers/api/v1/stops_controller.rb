@@ -173,15 +173,17 @@ class Api::V1::StopsController < ApplicationController
         if stops[i].stopresources
           stop_resources = stops[i].stopresources
           stop_resources.each do |stop_resource|
-            if stop_resource.resource_id == 2
+            if stop_resource.resource_id == 2 || stop_resource.resource_id == 15
               stop_returned = {
                 id: stops[i].id,
                 miles_from_ga: stops[i].miles_from_ga,
                 miles_from_k: stops[i].miles_from_k,
                 name: stops[i].name
               }
-              holder_array << stop_returned
-              counter += 1
+              unless holder_array.include?(stop_returned)
+                holder_array << stop_returned
+                counter += 1
+              end
             end
           end
           i += 1
