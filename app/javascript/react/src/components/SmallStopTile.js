@@ -34,7 +34,7 @@ const SmallStopTile = props => {
     )
   } else if (props.tileClass == "camps") {
     return (
-      printTile("", "small-camp-tile-name")
+      printTile("", "camp-tile-name")
     )
   } else {
     return (

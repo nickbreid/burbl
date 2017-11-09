@@ -224,22 +224,22 @@ button:focus {
 }
 
 .camp-tile-name {
-  background-color: #EFF3DA;
+  background-color: #FFECB4;
 }
 
 .water-tile-name {
   background: linear-gradient(#FFF 50%, rgba(255,255,255,.5) 0) 0 0,
   radial-gradient(circle closest-side, #FFF 75%, rgba(255,255,255,0) 0) 0 0,
   radial-gradient(circle closest-side, #FFF 75%, rgba(255,255,255,0) 0) 65px 0 #48B;
-  background-size: 18px 95px;
+  background-size: 18px 115%;
   background-repeat:repeat-x;
 }
 
 .water-camp-tile-name {
-  background: linear-gradient(#EFF3DA 50%, rgba(239,243,218,0) 0) 0 0,
-  radial-gradient(circle closest-side, #EFF3DA 75%, rgba(239,243,218,0) 0) 0 0,
-  radial-gradient(circle closest-side, #EFF3DA 75%, rgba(255,255,255,.5) 0) 65px 0 #48B;
-  background-size: 18px 95px;
+  background: linear-gradient(#FFECB4 50%, rgba(255,204,51,0) 0) 0 0,
+  radial-gradient(circle closest-side, #FFECB4 75%, rgba(239,243,218,0) 0) 0 0,
+  radial-gradient(circle closest-side, #FFECB4 75%, rgba(255,255,255,.5) 0) 65px 0 #48B;
+  background-size: 18px 115%;
   background-repeat:repeat-x;
 }
 

@@ -36,6 +36,7 @@ class NearestCamps extends Component {
           distance={parseFloat(distance).toFixed(1)}
           name={stop.name}
           onClick={this.props.onClick}
+          tileClass="camps"
         />
       )
     })
@@ -50,6 +51,7 @@ class NearestCamps extends Component {
           distance={parseFloat(distance).toFixed(1)}
           name={stop.name}
           onClick={this.props.onClick}
+          tileClass="camps"
         />
       )
     })
