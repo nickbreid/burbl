@@ -49,8 +49,8 @@ const StopTile = props => {
         waterTile = true;
       }
 
-      //check if resource is campsite for tile border
-      if (resource.resource == "campsites") {
+      //check if resource is campsite or shelter for tile hue
+      if (resource.resource == "campsites" || resource.resource == "shelter") {
         campTile = true;
       }
 
