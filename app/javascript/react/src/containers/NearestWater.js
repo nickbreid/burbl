@@ -26,12 +26,17 @@ class NearestWater extends Component {
 
   render() {
 
+    let distance;
+
     let noboWaterTiles = this.state.noboStops.map((stop) => {
+
+      distance = Math.abs(this.props.stopMile - stop.miles_from_ga)
        return (
         <SmallStopTile
           id={stop.id}
           key={stop.id}
           mileMarker={stop.miles_from_ga}
+          distance={parseFloat(distance).toFixed(1)}
           name={stop.name}
           tileClass="water"
           onClick={this.props.onClick}
@@ -40,11 +45,13 @@ class NearestWater extends Component {
     })
 
     let soboWaterTiles = this.state.soboStops.map((stop) => {
+      distance = Math.abs(this.props.stopMile - stop.miles_from_ga)
        return (
         <SmallStopTile
           id={stop.id}
           key={stop.id}
           mileMarker={stop.miles_from_ga}
+          distance={parseFloat(distance).toFixed(1)}
           name={stop.name}
           tileClass="water"
           onClick={this.props.onClick}

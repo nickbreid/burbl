@@ -127,10 +127,12 @@ class StopsShowContainer extends Component {
         </div>
         <NearestWater
           stopId={this.state.stop.id}
+          stopMile={this.state.stop.mile_marker}
           onClick={this.changeStop}
         />
         <NearestCamps
           stopId={this.state.stop.id}
+          stopMile={this.state.stop.mile_marker}
           onClick={this.changeStop}
         />
         <CommentsContainer
