@@ -2,10 +2,17 @@ class Api::V1::StopsController < ApplicationController
   def index
     mile = params[:mile].to_f
     nobo = params[:nobo]
+    range = params[:range].to_i
 
     if nobo == "false"
       stops = Stop.where("miles_from_k >= ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }.reverse
-      stops = stops[0..3]
+
+      if range > 5
+        stops = range_limiter(mile, range, nobo, stops)
+      else
+        stops = stops[0..5]
+      end
+
       prev_stop = Stop.where("miles_from_k < ?", mile).first
       this_stop = stops.first
       if prev_stop
@@ -13,7 +20,13 @@ class Api::V1::StopsController < ApplicationController
       end
     else
       stops = Stop.where("miles_from_ga >= ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }
-      stops = stops[0..3]
+
+      if range > 5
+        stops = range_limiter(mile, range, nobo, stops)
+      else
+        stops = stops[0..5]
+      end
+
       prev_stop = Stop.where("miles_from_ga < ?", mile).last
       this_stop = stops.first
       if prev_stop
@@ -32,6 +45,26 @@ class Api::V1::StopsController < ApplicationController
       stop_returned
     end
     render json: { status: 'SUCCESS', message: 'Loaded index of stops', data: parsed_stops, prev_stop: prev_stop, this_stop: this_stop }, status: :ok
+  end
+
+  def range_limiter(mile, range, directionNobo, stops)
+    returned_stops = []
+    stops.map do |stop|
+      if directionNobo == "true"
+        if stop.miles_from_ga <= (mile + range)
+          returned_stops << stop
+        else
+          break
+        end
+      elsif directionNobo == "false"
+        if stop.miles_from_k <= (mile + range)
+          returned_stops << stop
+        else
+          break
+        end
+      end
+    end
+    returned_stops
   end
 
 

@@ -4,6 +4,7 @@ import StopTile from '../components/StopTile.js'
 import StopTileLabels from '../components/StopTileLabels.js'
 import MileField from '../components/MileField.js'
 import NoboToggle from '../components/NoboToggle.js'
+import RangeField from '../components/Rangefield.js'
 import SignInButton from '../components/SignInButton.js'
 import Footer from '../components/Footer.js'
 
@@ -16,6 +17,7 @@ class StopsIndexContainer extends Component {
       nobo: true,
       prevStop: {},
       thisStop: {},
+      range: 5,
       errors: ''
     }
     this.toggleNobo = this.toggleNobo.bind(this)
@@ -23,6 +25,7 @@ class StopsIndexContainer extends Component {
     this.handlePlus = this.handlePlus.bind(this)
     this.handleMinus = this.handleMinus.bind(this)
     this.validateMile = this.validateMile.bind(this)
+    this.handleRange = this.handleRange.bind(this)
   }
 
   // swap direction from north to south
@@ -40,6 +43,13 @@ class StopsIndexContainer extends Component {
     this.validateMile(newMile, this.state.nobo);
     this.setState({ mile: newMile })
   }
+
+  // updates state on RangeField change
+  handleRange(event) {
+    let newRange = event.target.value
+    this.setState({ range: newRange })
+  }
+
 
   // button pushed to increase mile by 1
   handlePlus() {
@@ -120,8 +130,8 @@ class StopsIndexContainer extends Component {
 
   // if mile or nobo changes, fetch updated stops data
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.mile !== this.state.mile || prevState.nobo !== this.state.nobo) {
-      fetch(`/api/v1/stops/?nobo=${this.state.nobo}&mile=${this.state.mile}`, {
+    if (prevState.mile !== this.state.mile || prevState.nobo !== this.state.nobo || prevState.range !== this.state.range) {
+      fetch(`/api/v1/stops/?nobo=${this.state.nobo}&mile=${this.state.mile}&range=${this.state.range}`, {
         credentials: 'same-origin',
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
@@ -186,20 +196,26 @@ class StopsIndexContainer extends Component {
             </div>
           </div>
           <div className="stops-container">
-            <div className="row input-row align-items-bottom">
-              <div className="small-12 medium-6 columns">
-                <p>Choose a direction and mile-marker. The limits within Massachusetts are {ctBorder} to {vtBorder}.</p>
+            <div className="row">
+              <div className="small-12 columns">
+                <p className="intro">Choose a direction and mile-marker. The limits within Massachusetts are {ctBorder} to {vtBorder}.</p>
                 {errorDiv}
               </div>
-              <NoboToggle
-                toggleNobo={this.toggleNobo}
-              />
-              <MileField
-                mile={this.state.mile}
-                handleChange={this.handleChange}
-                handlePlus={this.handlePlus}
-                handleMinus={this.handleMinus}
-              />
+              <div className="flex-container">
+                <NoboToggle
+                  toggleNobo={this.toggleNobo}
+                />
+                <RangeField
+                  range={this.state.range}
+                  handleChange={this.handleRange}
+                />
+                <MileField
+                  mile={this.state.mile}
+                  handleChange={this.handleChange}
+                  handlePlus={this.handlePlus}
+                  handleMinus={this.handleMinus}
+                />
+              </div>
             </div>
             <ul>
               <StopTileLabels />

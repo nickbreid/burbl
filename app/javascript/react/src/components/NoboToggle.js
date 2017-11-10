@@ -7,7 +7,7 @@ const NoboToggle = props => {
   }
 
   return (
-    <div className="small-6 medium-3 columns">
+    <div>
       <div className="switch large" onChange={handleClick}>
         <input className="switch-input" id="nobo" type="checkbox" name="nobo"/>
         <label className="switch-paddle" htmlFor="nobo">
