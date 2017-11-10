@@ -4,7 +4,7 @@ import StopTile from '../components/StopTile.js'
 import StopTileLabels from '../components/StopTileLabels.js'
 import MileField from '../components/MileField.js'
 import NoboToggle from '../components/NoboToggle.js'
-import RangeField from '../components/Rangefield.js'
+import RangeField from '../components/RangeField.js'
 import SignInButton from '../components/SignInButton.js'
 import Footer from '../components/Footer.js'
 
