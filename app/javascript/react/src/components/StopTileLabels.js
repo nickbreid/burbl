@@ -4,7 +4,7 @@ const StopTileLabels = props => {
 // does this need props ^
   return (
     <li>
-      <div className="row align-items-bottom column-label">
+      <div id="tile-labels" className="row align-items-bottom column-label">
         <div className="small-3 columns column-label-right">
           <p>Mile</p>
         </div>

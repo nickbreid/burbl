@@ -5,7 +5,7 @@ const RangeField = props => {
   return (
     <div>
       <div className="input-group plus-minus-input">
-        <label>
+        <label id="range-id">
           Range
           <input id="range-field" type="number" placeholder=">5" value={props.range} onChange={props.handleChange}></input>
         </label>
