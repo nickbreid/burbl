@@ -195,7 +195,7 @@ class StopsIndexContainer extends Component {
               </div>
             </div>
           </div>
-          <div className="stops-container">
+          <div id="stops-container">
             <div className="row">
               <div className="small-12 columns">
                 <p className="intro">Choose a direction and mile-marker. The limits within Massachusetts are {ctBorder} to {vtBorder}.</p>
