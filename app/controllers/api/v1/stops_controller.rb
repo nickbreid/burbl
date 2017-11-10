@@ -7,7 +7,7 @@ class Api::V1::StopsController < ApplicationController
     if nobo == "false"
       stops = Stop.where("miles_from_k >= ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }.reverse
 
-      if range > 5
+      if range >= 5
         stops = range_limiter(mile, range, nobo, stops)
       else
         stops = stops[0..5]
@@ -21,7 +21,7 @@ class Api::V1::StopsController < ApplicationController
     else
       stops = Stop.where("miles_from_ga >= ?", mile).to_a.sort_by { |stop| stop.miles_from_ga }
 
-      if range > 5
+      if range >= 5
         stops = range_limiter(mile, range, nobo, stops)
       else
         stops = stops[0..5]
