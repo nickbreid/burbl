@@ -294,3 +294,22 @@ button:focus {
   font-size: 14px;
   padding: 0.5rem;
 }
+
+.flex-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-end;
+}
+
+#range-field {
+  margin-bottom: 0;
+  width: 160px;
+}
+
+.intro {
+  padding-top: 30px;
+  text-align: center;
+  font-size: 20px;
+}

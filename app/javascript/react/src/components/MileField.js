@@ -11,7 +11,7 @@ const MileField = props => {
   }
 
   return (
-    <div className="small-6 medium-3 columns align-items-bottom">
+    <div>
       <div className="input-group plus-minus-input">
         <div className="input-group-button">
           <button type="button" className="button circle" onClick={minusOne}>

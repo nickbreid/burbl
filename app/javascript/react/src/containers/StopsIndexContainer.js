@@ -4,6 +4,7 @@ import StopTile from '../components/StopTile.js'
 import StopTileLabels from '../components/StopTileLabels.js'
 import MileField from '../components/MileField.js'
 import NoboToggle from '../components/NoboToggle.js'
+import RangeField from '../components/RangeField.js'
 import SignInButton from '../components/SignInButton.js'
 import Footer from '../components/Footer.js'
 
@@ -16,6 +17,7 @@ class StopsIndexContainer extends Component {
       nobo: true,
       prevStop: {},
       thisStop: {},
+      range: 5,
       errors: ''
     }
     this.toggleNobo = this.toggleNobo.bind(this)
@@ -23,6 +25,7 @@ class StopsIndexContainer extends Component {
     this.handlePlus = this.handlePlus.bind(this)
     this.handleMinus = this.handleMinus.bind(this)
     this.validateMile = this.validateMile.bind(this)
+    this.handleRange = this.handleRange.bind(this)
   }
 
   // swap direction from north to south
@@ -41,6 +44,13 @@ class StopsIndexContainer extends Component {
     this.setState({ mile: newMile })
   }
 
+  // updates state on RangeField change
+  handleRange(event) {
+    let newRange = event.target.value
+    this.setState({ range: newRange })
+  }
+
+
   // button pushed to increase mile by 1
   handlePlus() {
     let milePlusOne = parseFloat(this.state.mile)+1
@@ -55,13 +65,14 @@ class StopsIndexContainer extends Component {
   handleMinus() {
     let mileMinusOne = parseFloat(this.state.mile)-1
     let newMile = mileMinusOne.toFixed(1)
-
     if (this.validateMile(newMile, this.state.nobo) && !this.state.errors) {
       this.setState({ mile: parseFloat(mileMinusOne.toFixed(1))
       })
     }
   }
 
+  // check that mile is in valid nobo or sobo range -- if not, add to error state
+  // and return false
   validateMile(mile, directionIsNobo) {
     if (directionIsNobo == true && mile < 1505.9) {
       let newError = "For northbounders, any mile less than 1505.9 is south of Massachusetts. Please enter a valid mile marker.";
@@ -117,10 +128,10 @@ class StopsIndexContainer extends Component {
     })
   }
 
-  // if mile or nobo changes, fetch relevant stops data
+  // if mile or nobo changes, fetch updated stops data
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.mile !== this.state.mile || prevState.nobo !== this.state.nobo) {
-      fetch(`/api/v1/stops/?nobo=${this.state.nobo}&mile=${this.state.mile}`, {
+    if (prevState.mile !== this.state.mile || prevState.nobo !== this.state.nobo || prevState.range !== this.state.range) {
+      fetch(`/api/v1/stops/?nobo=${this.state.nobo}&mile=${this.state.mile}&range=${this.state.range}`, {
         credentials: 'same-origin',
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
@@ -137,6 +148,7 @@ class StopsIndexContainer extends Component {
     }
 
   render() {
+    // turn fetched stops data into StopTile components
     let parsedStops = this.state.stops.map((stop) => {
       let prevStop, thisStop;
       if (this.state.prevStop && this.state.prevStop.id == stop.id) {
@@ -184,20 +196,26 @@ class StopsIndexContainer extends Component {
             </div>
           </div>
           <div className="stops-container">
-            <div className="row input-row align-items-bottom">
-              <div className="small-12 medium-6 columns">
-                <p>Choose a direction and mile-marker. The limits within Massachusetts are {ctBorder} to {vtBorder}.</p>
+            <div className="row">
+              <div className="small-12 columns">
+                <p className="intro">Choose a direction and mile-marker. The limits within Massachusetts are {ctBorder} to {vtBorder}.</p>
                 {errorDiv}
               </div>
-              <NoboToggle
-                toggleNobo={this.toggleNobo}
-              />
-              <MileField
-                mile={this.state.mile}
-                handleChange={this.handleChange}
-                handlePlus={this.handlePlus}
-                handleMinus={this.handleMinus}
-              />
+              <div className="flex-container">
+                <NoboToggle
+                  toggleNobo={this.toggleNobo}
+                />
+                <RangeField
+                  range={this.state.range}
+                  handleChange={this.handleRange}
+                />
+                <MileField
+                  mile={this.state.mile}
+                  handleChange={this.handleChange}
+                  handlePlus={this.handlePlus}
+                  handleMinus={this.handleMinus}
+                />
+              </div>
             </div>
             <ul>
               <StopTileLabels />
