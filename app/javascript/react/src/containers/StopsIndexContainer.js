@@ -55,13 +55,14 @@ class StopsIndexContainer extends Component {
   handleMinus() {
     let mileMinusOne = parseFloat(this.state.mile)-1
     let newMile = mileMinusOne.toFixed(1)
-
     if (this.validateMile(newMile, this.state.nobo) && !this.state.errors) {
       this.setState({ mile: parseFloat(mileMinusOne.toFixed(1))
       })
     }
   }
 
+  // check that mile is in valid nobo or sobo range -- if not, add to error state
+  // and return false
   validateMile(mile, directionIsNobo) {
     if (directionIsNobo == true && mile < 1505.9) {
       let newError = "For northbounders, any mile less than 1505.9 is south of Massachusetts. Please enter a valid mile marker.";
@@ -117,7 +118,7 @@ class StopsIndexContainer extends Component {
     })
   }
 
-  // if mile or nobo changes, fetch relevant stops data
+  // if mile or nobo changes, fetch updated stops data
   componentDidUpdate(prevProps, prevState) {
     if (prevState.mile !== this.state.mile || prevState.nobo !== this.state.nobo) {
       fetch(`/api/v1/stops/?nobo=${this.state.nobo}&mile=${this.state.mile}`, {
@@ -137,6 +138,7 @@ class StopsIndexContainer extends Component {
     }
 
   render() {
+    // turn fetched stops data into StopTile components
     let parsedStops = this.state.stops.map((stop) => {
       let prevStop, thisStop;
       if (this.state.prevStop && this.state.prevStop.id == stop.id) {
